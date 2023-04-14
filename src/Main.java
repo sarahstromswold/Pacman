@@ -16,6 +16,7 @@ class Main extends JPanel {
     public Main() {
 	world = new World (WIDTH, HEIGHT);
 	this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    world.update(FPS);
 	repaint();
     }
     public static void main(String[] args) {
@@ -41,7 +42,7 @@ class World {
     int height;
     int width;
     int numPoints;
-    //PacMan pacman;
+    PacMan pacman = new PacMan(this);
     //Fire fire;
     //Points points;
     //Powerups power;
@@ -56,10 +57,12 @@ class World {
 	g.setColor(Color.WHITE);
 	//g.drawString("Points: " + numPoints);
 
-	//draw pacman
+	pacman.draw(g);
 	//draw fire guys
 	//draw points
 	//draw powerups
     }
-    //update method (double time)
+    public void update(double time) {
+    pacman.update(time);
+    }
 }
