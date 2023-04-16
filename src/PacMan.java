@@ -1,7 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class PacMan {
     int radius;
@@ -29,7 +26,6 @@ public class PacMan {
     }
 
     public void draw(Graphics g) {
-        //Color color = g.getColor();
         g.setColor(Color.YELLOW);
         g.fillArc((int)positionX,(int)positionY,50,50,25,180);
         //velocity x neg, point

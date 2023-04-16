@@ -87,8 +87,8 @@ class World {
     int height;
     int width;
     int numPoints;
+    Fire fire[];
     PacMan pacman = new PacMan(this);
-    //Fire fire;
     //Points points;
     //Powerups power;
 
@@ -96,19 +96,28 @@ class World {
 	width = initWidth;
 	height = initHeight;
 	numPoints = 0;
+    fire = new Fire[5];
+    for (int i = 0; i < 5; i++) {
+        fire[i] = new Fire(this, width/2 + i * 20, height/2);
+    }
     }
 
     public void drawWorld(Graphics g) {
 	g.setColor(Color.WHITE);
 	//g.drawString("Points: " + numPoints);
-	pacman.draw(g);
-	//draw fire guys
+	pacman.draw(g); //pacman
+	for (int i = 0; i < 5; i++) {
+        fire[i].draw(g);
+    } //fire guys
 	//draw points
 	//draw powerups
     }
 
     public void update(double time) {
-    pacman.update(time);
+    pacman.update(time); //update pacman
+//    for(int i = 0; i < 5; i++) {
+//        fire[i].update(this,time);
+//    } fire update
     }
 
 }
