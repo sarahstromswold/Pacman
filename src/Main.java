@@ -15,9 +15,9 @@ public class Main extends JPanel implements KeyListener{
 
     public Main() {
 	world = new World (WIDTH, HEIGHT);
-    addKeyListener(this);
-    Thread mainThread = new Thread(new Runner());
-    mainThread.start();
+	addKeyListener(this);
+	Thread mainThread = new Thread(new Runner());
+	mainThread.start();
 	this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 

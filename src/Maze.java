@@ -11,7 +11,7 @@ public class Maze {
     int initY;
     
     public Maze(int initX, int initY) {
-        t = new Tile();
+        t = new Tile(0);
 	a = t.tile;
 	this.initX = initX;
 	this.initY = initY;
