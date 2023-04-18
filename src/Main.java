@@ -108,6 +108,8 @@ class World {
 	pacman.draw(g); //pacman
 	for (int i = 0; i < 5; i++) {
         fire[i].draw(g);
+	Maze m = new Maze(100, 100);
+	m.colorTile(g);
     } //fire guys
 	//draw points
 	//draw powerups
