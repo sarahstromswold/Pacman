@@ -1,7 +1,7 @@
 public class Tile{
 
     int[][] tile = new int[5][5];
-    int[][][] tiles = new int[2][5][5];
+    int[][][] tiles = new int[4][5][5];
     
     public Tile(int type) {
 	tiles = createTiles();
@@ -9,9 +9,11 @@ public class Tile{
     }
 
     public int[][][] createTiles() {
-	int[][][] holder = new int[2][5][5];
+	int[][][] holder = new int[4][5][5];
 	holder[0] = typeOne();
 	holder[1] = typeTwo();
+	holder[2] = typeThree();
+	holder[3] = typeFour();
 	return holder;
     }
     
@@ -65,6 +67,57 @@ public class Tile{
 	b[4][1] = 0;
 	b[4][3] = 0;
 	return b;
+    }
+    
+    public int[][] typeThree() {
+	int[][] c = new int[5][5];
+	for (int i = 0; i < 5; i++) {
+	    for (int j = 0; j < 5; j++) {
+		c[i][j] = 1;
+	    }
+	}
+	c[0][1] = 0;
+	c[0][3] = 0;
+	c[0][4] = 0;
+
+	for (int j = 1; j < 4; j++) {
+	    c[1][j] = 0;
+	}
+
+	c[2][1] = 0;
+	c[2][4] = 0;
+
+	for (int j = 0; j < 5; j++) {
+	    c[3][j] = 0;
+	}
+	c[4][2] = 0;
+	return c;
+    }
+
+    public int[][] typeFour() {
+	int[][] d = new int[5][5];
+	for (int i = 0; i < 5; i++) {
+	    for (int j = 0; j < 5; j++) {
+		d[i][j] = 1;
+	    }
+	}
+
+	for (int j = 0; j < 3; j++) {
+	    d[0][j] = 0;
+	}
+
+	d[1][2] = 0;
+
+	for (int j = 0; j < 5; j++) {
+	    d[2][j] = 0;
+	}
+
+	d[3][2] = 0;
+
+	for (int j = 2; j < 5; j++) {
+	    d[4][j] = 0;
+	}
+	return d;
     }
 }
 	
