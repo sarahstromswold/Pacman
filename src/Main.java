@@ -36,7 +36,6 @@ public class Main extends JPanel implements KeyListener{
 	g.fillRect(0, 0, WIDTH, HEIGHT);
 
 	world.drawWorld(g);
-	world.m.colorTiles(g);
     }
     //need menu method
 
@@ -110,6 +109,7 @@ class World {
 	for (int i = 0; i < 5; i++) {
 	    fire[i].draw(g);
 	}
+	m.colorTiles(g);
 	//fire guys
 	//draw points
 	//draw powerups
