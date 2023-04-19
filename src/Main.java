@@ -36,6 +36,7 @@ public class Main extends JPanel implements KeyListener{
 	g.fillRect(0, 0, WIDTH, HEIGHT);
 
 	world.drawWorld(g);
+	world.m.colorTiles(g);
     }
     //need menu method
 
@@ -89,6 +90,7 @@ class World {
     int numPoints;
     Fire fire[];
     PacMan pacman = new PacMan(this);
+    public Maze m = new Maze(100, 600);
     //Points points;
     //Powerups power;
 
@@ -96,27 +98,27 @@ class World {
 	width = initWidth;
 	height = initHeight;
 	numPoints = 0;
-    fire = new Fire[5];
-    for (int i = 0; i < 5; i++) {
-        fire[i] = new Fire(this, width/2 + i * 20, height/2);
-    }
+	fire = new Fire[5];
+	for (int i = 0; i < 5; i++) {
+	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
+	}
     }
 
     public void drawWorld(Graphics g) {
-	g.setColor(Color.WHITE);
 	//g.drawString("Points: " + numPoints);
 	pacman.draw(g); //pacman
 	for (int i = 0; i < 5; i++) {
-        fire[i].draw(g);
-	Maze m = new Maze(100, 100);
-	m.colorTile(g);
-    } //fire guys
+	    fire[i].draw(g);
+	}
+	//fire guys
 	//draw points
 	//draw powerups
     }
 
     public void update(double time) {
-    pacman.update(time); //update pacman
+    pacman.update(time);
+    
+    //update pacman
 //    for(int i = 0; i < 5; i++) {
 //        fire[i].update(this,time);
 //    } fire update
