@@ -16,7 +16,7 @@ public class PacMan {
         positionY = 500;
         velocityX = 0;
         velocityY = 0;
-        radius = 25;
+        radius = 14;
 
     }
 
@@ -27,9 +27,9 @@ public class PacMan {
 
     public void draw(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillArc((int)positionX,(int)positionY,50,50,25,180);
+        g.fillArc((int)positionX,(int)positionY,radius * 2, radius * 2,25,180);
         //velocity x neg, point
-        g.fillArc((int)positionX,(int)positionY,50,50, -25,-180);
+        g.fillArc((int)positionX,(int)positionY, radius * 2, radius * 2, -25,-180);
     }
 
 }

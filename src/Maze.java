@@ -24,7 +24,19 @@ public class Maze {
 	    for (int j = 0; j < 5; j++) {
 		int t = rand.nextInt(4);
 		int r = rand.nextInt(4);
-		if (i == 1 && j == 2) {
+		if (i == 0 && j == 0) {
+		    Tile tile0 = new Tile(t, r);
+		    while(tile0.tile[4][0] != 0) {
+			int tryagain = r;
+			while (tryagain == 1) {
+			    tryagain = rand.nextInt(4);
+			    tile0 = new Tile(t, tryagain);
+			}
+			tile0.tile = tile0.rotate();
+		    }
+		    addTile(tile0, i, j);
+		}
+		else if (i == 1 && j == 2) {
 		    Tile c = new Tile(4, 0);
 		    addTile(c, i, j);
 		}
