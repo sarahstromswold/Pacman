@@ -142,7 +142,7 @@ public class Tile{
 	    s[i][4] = 1;
 	}
 	
-	for (int j = 1; j < 3; j++) {
+	for (int j = 1; j < 4; j++) {
 	    s[0][j] = 2;
 	}
 	return s;

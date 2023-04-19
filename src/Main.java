@@ -89,7 +89,7 @@ class World {
     int numPoints;
     Fire fire[];
     PacMan pacman = new PacMan(this);
-    public Maze m = new Maze(100, 600);
+    public Maze m = new Maze(50, 500);
     //Points points;
     //Powerups power;
 
@@ -110,6 +110,7 @@ class World {
 	    fire[i].draw(g);
 	}
 	m.colorTiles(g);
+	g.drawRect(50, 52, 800, 480);
 	//fire guys
 	//draw points
 	//draw powerups

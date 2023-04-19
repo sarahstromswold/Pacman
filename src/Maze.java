@@ -10,7 +10,7 @@ public class Maze {
     int initY;
     
     public Maze(int initX, int initY) {
-	maze = new int[25][15];
+	maze = new int[15][25];
 	randomizeMaze();
       	this.initX = initX;
 	this.initY = initY;
@@ -20,8 +20,8 @@ public class Maze {
 
     public void randomizeMaze() {
 	Random rand = new Random();
-	for (int i = 0; i < 5; i++) {
-	    for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < 3; i++) {
+	    for (int j = 0; j < 5; j++) {
 		int t = rand.nextInt(4);
 		int r = rand.nextInt(4);
 		if (i == 2 && j == 1) {
@@ -38,20 +38,22 @@ public class Maze {
     }
     
     public void colorTiles(Graphics g) {
-	for (int i = 24; i >= 0; i--) {
-	    y -= 10;
+	x = initX;
+	y = initY;
+	for (int i = 14; i >= 0; i--) {
 	    x = initX;
-	    for (int j = 0; j < 15; j++) {
+	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 1) {
 		    g.setColor(Color.WHITE);
-		    g.fillRect(x, y, 10, 10);
+		    g.fillRoundRect(x, y, 32, 32, 10, 10);
 		}
 		else if (maze[i][j] == 2) {
 		    g.setColor(Color.GRAY);
-		    g.fillRect(x, y, 10, 10);
+		    g.fillRoundRect(x, y, 32, 32, 10, 10);
 		}
-		x += 10;
+		x += 32;
 	    }
+	    y -= 32;
 	}
     }
     
