@@ -24,13 +24,13 @@ public class Maze {
 	    for (int j = 0; j < 5; j++) {
 		int t = rand.nextInt(4);
 		int r = rand.nextInt(4);
-		if (i == 0 && j == 0) {
+		if (i == 2 && j == 0) {
 		    Tile tile0 = new Tile(t, r);
+		    //something in here's amiss
 		    while(tile0.tile[4][0] != 0) {
-			int tryagain = r;
-			while (tryagain == 1) {
-			    tryagain = rand.nextInt(4);
-			    tile0 = new Tile(t, tryagain);
+			while (r == 1) {
+			    r = rand.nextInt(4);
+			    tile0 = new Tile(t, r);
 			}
 			tile0.tile = tile0.rotate();
 		    }
@@ -44,7 +44,6 @@ public class Maze {
 		    Tile tile1 = new Tile(t, r);
 		    addTile(tile1, i, j);
 		}
-		//maze[(i * 5) + k][(j * 5) + l] = tile[k][l];
 	    }
 	}
     }

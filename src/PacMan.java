@@ -17,12 +17,17 @@ public class PacMan {
         velocityX = 0;
         velocityY = 0;
         radius = 14;
-
     }
 
     public void update(double time) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
+	if (positionX >= 820 || positionX <= 52) {
+	    velocityX = 0;
+	}
+	if (positionY >= 503 || positionY <= 56) {
+	    velocityY = 0;
+	}
     }
 
     public void draw(Graphics g) {
