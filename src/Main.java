@@ -97,8 +97,8 @@ class World {
     int width;
     int numPoints;
     Fire fire[];
-    PacMan pacman = new PacMan(this);
     public Maze m = new Maze(50, 500);
+    PacMan pacman = new PacMan(m);
     //Points points;
     //Powerups power;
 
@@ -126,7 +126,7 @@ class World {
     }
 
     public void update(double time) {
-    pacman.update(time);
+    pacman.update(time, m);
     
     //update pacman
 //    for(int i = 0; i < 5; i++) {

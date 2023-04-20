@@ -11,7 +11,9 @@ public class PacMan {
     int startangle1;
     int startangle2;
     int numLives;
-    public PacMan(World w) {
+    int tileX;
+    int tileY;
+    public PacMan(Maze m) {
         initialPositionX = 52;
         initialPositionY = 500;
         positionX = 52;
@@ -21,9 +23,12 @@ public class PacMan {
         radius = 14;
         startangle1 = 25;
         startangle2 = -25;
+        tileX = (int)(positionX - m.initX)/32;
+        tileY = (int)(((positionY - (m.initY - 480))/32) - 1);
+        System.out.println(tileY);
     } //pacman constructor
 
-    public void update(double time) {
+    public void update(double time,Maze m) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
 	if (positionX >= 820 || positionX <= 52) {
@@ -32,6 +37,10 @@ public class PacMan {
 	if (positionY >= 503 || positionY <= 56) {
 	    velocityY = 0;
 	} //updates pacman
+    if (m.maze[tileX][tileY] == 1) {
+        velocityY = 0;
+        velocityX = 0;
+    }
     }
 
     public void draw(Graphics g) {
