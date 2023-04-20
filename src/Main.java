@@ -41,21 +41,30 @@ public class Main extends JPanel implements KeyListener{
 
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
-        if (c == 'w') {
+        if (c == 'w') { //move up
             world.pacman.velocityY = -100;
             world.pacman.velocityX = 0;
+            world.pacman.startangle1 = 115;
+            world.pacman.startangle2 = 65;
         }
-        if (c == 'a') {
+        if (c == 'a') { //move left
             world.pacman.velocityX = -100;
             world.pacman.velocityY = 0;
+            world.pacman.startangle1 = -25;
+            world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
         }
-        if (c == 's') {
+        if (c == 's') { //move down
             world.pacman.velocityY = 100;
             world.pacman.velocityX = 0;
+            world.pacman.startangle1 = -65;
+            world.pacman.startangle2 = -115;
         }
-        if (c == 'd') {
+        if (c == 'd') { //move right
             world.pacman.velocityX = 100;
             world.pacman.velocityY = 0;
+            world.pacman.startangle1 = 25;
+            world.pacman.startangle2 = -25;
+
         }
     }
     class Runner implements Runnable {

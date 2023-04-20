@@ -28,10 +28,10 @@ public class Maze {
 		    Tile tile0 = new Tile(t, r);
 		    //something in here's amiss
 		    while(tile0.tile[4][0] != 0) {
-			while (r == 1) {
-			    r = rand.nextInt(4);
-			    tile0 = new Tile(t, r);
-			}
+				while (t == 1) {
+			    	t = rand.nextInt(4);
+			    	tile0 = new Tile(t, r);
+				}
 			tile0.tile = tile0.rotate();
 		    }
 		    addTile(tile0, i, j);
