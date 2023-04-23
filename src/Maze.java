@@ -26,12 +26,11 @@ public class Maze {
 		int r = rand.nextInt(4);
 		if (i == 2 && j == 0) {
 		    Tile tile0 = new Tile(t, r);
-		    //something in here's amiss
 		    while(tile0.tile[4][0] != 0) {
-				while (t == 1) {
-			    	t = rand.nextInt(4);
-			    	tile0 = new Tile(t, r);
-				}
+			while (t == 1) {
+			    t = rand.nextInt(4);
+			    tile0 = new Tile(t, r);
+			}
 			tile0.tile = tile0.rotate();
 		    }
 		    addTile(tile0, i, j);
@@ -45,6 +44,9 @@ public class Maze {
 		    addTile(tile1, i, j);
 		}
 	    }
+	}
+	while(!checkMaze()) {
+	    fixMaze();
 	}
     }
     
@@ -73,6 +75,86 @@ public class Maze {
 	    for (int j = 0; j < 5; j++) {
 		maze[(r * 5) + i][(c * 5) + j] = t.tile[i][j];
 	    }
+	}
+    }
+
+    public boolean checkMaze() {
+	//starts at i = 14 bc we know that square is open for pacman
+	maze[14][0] = 200;
+	int k = 199;
+	//boolean moved = true;
+	while(k > 2) {
+	    for (int i = 14; i >= 0; i--) {
+		for (int j = 0; j < 25; j++) {
+		    for(int r = i + 1; r > i - 2; r--) {
+			for (int c = j - 1; c < j + 2; c++) {
+			    if (c >= 0 && c < 25 && r >= 0 && r < 15) {
+				if ((c == j - 1 && r == i + 1) || (c == j - 1 && r == i - 1) || (c == j + 1 && r == i + 1) || (c == j + 1 && r == i - 1)) {
+				    continue;
+				}
+				else if (maze[r][c] == k + 1 && maze[i][j] == 0) {
+				    maze[i][j] = k;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	    k--;
+	}
+	boolean zero = true;
+	for (int i = 0; i < 15; i++) {
+	    for (int j = 0; j < 25; j++) {
+		if (i < 10 && i > 14 && j < 5 && j > 9 && maze[i][j] == 0) {
+		    zero = false;
+		}
+	    }
+	}	
+	prints();
+	return zero;
+    }
+
+    public void fixMaze() {
+	int smX = 0;
+	int smY = 14;
+	int current = 201;
+	boolean zero = false;
+	boolean number = false;	
+	for (int i = 13; i > 0; i--) {
+	    for (int j = 1; j < 24; j++) {
+		for (int r = i + 1; r > i - 2; r--) {
+		    for (int c = j - 1; c < j + 2; c++) {
+			if (i < 10 && i > 14 && j < 5 && j > 9) {
+			    if (r != i && c != j && maze[i][j] == 1) {
+				if (maze[r][c] == 0){
+				    zero = true;
+				}
+				else if (maze[r][c] > 2) {
+				    if (maze[r][c] < current) {
+					current = maze[r][c];
+					number = true;
+				    }
+				}
+				if (zero && number) {
+				    smY = i;
+				    smX = j;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	maze[smY][smX] = 0;
+    }
+	
+    public void prints() {
+	for (int i = 0; i < 15; i++) {
+	    System.out.print(i + "   ");
+	    for (int j = 0; j < 25; j++) {
+		System.out.print(maze[i][j] + "   ");
+	    }
+	    System.out.println("");
 	}
     }
 }

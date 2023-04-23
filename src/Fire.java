@@ -15,7 +15,6 @@ public class Fire {
         velocityX = 0;
         velocityY = 0;
         color = new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat());
-
     }
 
 //    public void update(double time) {
@@ -28,6 +27,5 @@ public class Fire {
         g.setColor(color);
         g.fillArc((int)positionX,(int)positionY,50,50, 0,-180);
     } //draw fire
-
 }
 

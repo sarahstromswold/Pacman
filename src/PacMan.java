@@ -14,33 +14,67 @@ public class PacMan {
     int tileX;
     int tileY;
     public PacMan(Maze m) {
-        initialPositionX = 52;
-        initialPositionY = 500;
-        positionX = 52;
-        positionY = 500;
+        initialPositionX = 54;
+        initialPositionY = 503;
+        positionX = 54;
+        positionY = 503;
         velocityX = 0;
         velocityY = 0;
-        radius = 14;
+        radius = 12;
         startangle1 = 25;
         startangle2 = -25;
-        tileX = (int)(positionX - m.initX)/32;
-        tileY = (int)(((positionY - (m.initY - 480))/32) - 1);
+        
         System.out.println(tileY);
     } //pacman constructor
 
-    public void update(double time,Maze m) {
+    public void update(double time, Maze m) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
-	if (positionX >= 820 || positionX <= 52) {
+	/*if (positionX > 820 || positionX < 52) {
 	    velocityX = 0;
 	}
-	if (positionY >= 503 || positionY <= 56) {
+	if (positionY > 503 || positionY < 56) {
 	    velocityY = 0;
-	} //updates pacman
-    if (m.maze[tileX][tileY] == 1) {
-        velocityY = 0;
-        velocityX = 0;
-    }
+	    }*/ //updates pacman
+	tileX = (int)((positionX - 2) - m.initX) / 32;
+        tileY = ((int)(positionY - (m.initY - 480)) / 32) - 1;
+	/*if (m.maze[tileX][tileY] == 1) {
+	    velocityY = 0;
+	    velocityX = 0;
+	    }*/
+        if (velocityY < 0) {
+	    if (tileY < 0) {
+		velocityY = 0;
+	    }
+	    else if (m.maze[tileY - 1][tileX] == 1) {
+		velocityY = 0;
+	    }
+	}
+	else if (velocityY > 0) {
+	    if (tileY > 14) {
+		velocityY = 0;
+	    }
+	    else if (m.maze[tileY + 1][tileX] == 1) {
+		velocityY = 0;
+	    }
+	}
+	else if (velocityX > 0) {
+	    if (tileX > 24) {
+		velocityY = 0;
+	    }
+	    else if (m.maze[tileY][tileX + 1] == 1) {
+		velocityX = 0;
+	    }
+	}
+	else if (velocityX < 0) {
+	    if (tileX < 1) {
+		velocityX = 0;
+	    }
+	    else if (m.maze[tileY][tileX - 1] == 1) {
+		velocityX = 0;
+	    }
+	}
+	//System.out.println("TileX: " + tileX + "TileY " + tileY);
     }
 
     public void draw(Graphics g) {
