@@ -57,7 +57,7 @@ public class Maze {
 	    x = initX;
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 1) {
-		    g.setColor(Color.WHITE);
+		    g.setColor(new Color(36, 36, 255));
 		    g.fillRoundRect(x, y, 32, 32, 10, 10);
 		}
 		else if (maze[i][j] == 2) {
@@ -114,8 +114,7 @@ public class Maze {
 		    zero = false;
 		}
 	    }
-	}	
-	prints();
+	}
 	System.out.println(zero);
 	return zero;
     }
@@ -135,27 +134,32 @@ public class Maze {
 		    continue;
 		}
 		else if (maze[i][j] == 1) {
-		    System.out.println("1");
-		    for (int r = i + 1; r < i - 2; r--) {
-			for (int c = j - 1; c < j + 2; c++) {
-			    System.out.println(r);
-			    System.out.println(c);
-			    if (maze[r][c] == 0){
-				zero = true;
-				System.out.println("zeroes");
-			    }
-			    
-			    else if (maze[r][c] > 2) {
-				if (maze[r][c] < current) {
-				    current = maze[r][c];
-				    number = true;
-				    System.out.println("numbers");
+		    for (int r = i + 1; r >= i - 1; r--) {
+				for (int c = j - 1; c <= j + 1; c++) {
+					if (maze[r][c] == 0) {
+						zero = true;
+//						System.out.println("zeroes");
+					}
 				}
-			    }
 			}
+			for (int r = i + 1; r >= i - 1; r--) {
+				for (int c = j - 1; c <= j + 1; c++) {
+
+					if (maze[r][c] > 2 && maze[r][c] < current && zero == true) {
+						current = maze[r][c];
+						number = true;
+						System.out.println("r = " + r);
+						System.out.println("c = " + c);
+						System.out.println("zero?: " + zero);
+						System.out.println("maze[r][c] = " + maze[r][c]);
+						System.out.println("current = " + current);
+
+			    	}
+				}
 		    }
 		}
 		if (zero == true && number == true) {
+			System.out.println("here");
 		    smY = i;
 		    smX = j;
 		}

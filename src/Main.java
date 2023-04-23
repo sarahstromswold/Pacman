@@ -46,18 +46,21 @@ public class Main extends JPanel implements KeyListener{
             world.pacman.velocityX = 0;
             world.pacman.startangle1 = 115;
             world.pacman.startangle2 = 65;
+
         }
         if (c == 'a' && world.pacman.positionX > 52) { //move left
             world.pacman.velocityX = -100;
             world.pacman.velocityY = 0;
             world.pacman.startangle1 = -25;
             world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
+
         }
         if (c == 's' && world.pacman.positionY < 503) { //move down
             world.pacman.velocityY = 100;
             world.pacman.velocityX = 0;
             world.pacman.startangle1 = -65;
             world.pacman.startangle2 = -115;
+
         }
         if (c == 'd' && world.pacman.positionX < 820) { //move right
             world.pacman.velocityX = 100;
