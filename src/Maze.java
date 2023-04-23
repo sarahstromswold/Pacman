@@ -79,6 +79,7 @@ public class Maze {
     }
 
     public boolean checkMaze() {
+	System.out.println("at checkmaze");
 	//starts at i = 14 bc we know that square is open for pacman
 	maze[14][0] = 200;
 	int k = 199;
@@ -103,18 +104,24 @@ public class Maze {
 	    k--;
 	}
 	boolean zero = true;
+	
 	for (int i = 0; i < 15; i++) {
 	    for (int j = 0; j < 25; j++) {
-		if (i < 10 && i > 14 && j < 5 && j > 9 && maze[i][j] == 0) {
+		if (i > 4 && i < 10 && j > 9 && j < 15) {
+		    continue;
+		}
+		else if (maze[i][j] == 0) {
 		    zero = false;
 		}
 	    }
 	}	
 	prints();
+	System.out.println(zero);
 	return zero;
     }
 
     public void fixMaze() {
+	System.out.println("at fixMaze");
 	int smX = 0;
 	int smY = 14;
 	int current = 201;
@@ -122,29 +129,40 @@ public class Maze {
 	boolean number = false;	
 	for (int i = 13; i > 0; i--) {
 	    for (int j = 1; j < 24; j++) {
-		for (int r = i + 1; r > i - 2; r--) {
-		    for (int c = j - 1; c < j + 2; c++) {
-			if (i < 10 && i > 14 && j < 5 && j > 9) {
-			    if (r != i && c != j && maze[i][j] == 1) {
-				if (maze[r][c] == 0){
-				    zero = true;
-				}
-				else if (maze[r][c] > 2) {
-				    if (maze[r][c] < current) {
-					current = maze[r][c];
-					number = true;
-				    }
-				}
-				if (zero && number) {
-				    smY = i;
-				    smX = j;
+		zero = false;
+		number = false;
+		if (i > 4 && i < 10 && j > 9 && j < 15) {
+		    continue;
+		}
+		else if (maze[i][j] == 1) {
+		    System.out.println("1");
+		    for (int r = i + 1; r < i - 2; r--) {
+			for (int c = j - 1; c < j + 2; c++) {
+			    System.out.println(r);
+			    System.out.println(c);
+			    if (maze[r][c] == 0){
+				zero = true;
+				System.out.println("zeroes");
+			    }
+			    
+			    else if (maze[r][c] > 2) {
+				if (maze[r][c] < current) {
+				    current = maze[r][c];
+				    number = true;
+				    System.out.println("numbers");
 				}
 			    }
 			}
 		    }
 		}
+		if (zero == true && number == true) {
+		    smY = i;
+		    smX = j;
+		}
 	    }
 	}
+	System.out.println(smY);
+	System.out.println(smX);
 	maze[smY][smX] = 0;
     }
 	
