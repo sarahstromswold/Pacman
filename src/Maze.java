@@ -79,7 +79,6 @@ public class Maze {
     }
 
     public boolean checkMaze() {
-	System.out.println("at checkmaze");
 	//starts at i = 14 bc we know that square is open for pacman
 	maze[14][0] = 200;
 	int k = 199;
@@ -115,12 +114,10 @@ public class Maze {
 		}
 	    }
 	}
-	System.out.println(zero);
 	return zero;
     }
 
     public void fixMaze() {
-	System.out.println("at fixMaze");
 	int smX = 0;
 	int smY = 14;
 	int current = 201;
@@ -138,7 +135,6 @@ public class Maze {
 				for (int c = j - 1; c <= j + 1; c++) {
 					if (maze[r][c] == 0) {
 						zero = true;
-//						System.out.println("zeroes");
 					}
 				}
 			}
@@ -148,25 +144,17 @@ public class Maze {
 					if (maze[r][c] > 2 && maze[r][c] < current && zero == true) {
 						current = maze[r][c];
 						number = true;
-						System.out.println("r = " + r);
-						System.out.println("c = " + c);
-						System.out.println("zero?: " + zero);
-						System.out.println("maze[r][c] = " + maze[r][c]);
-						System.out.println("current = " + current);
 
 			    	}
 				}
 		    }
 		}
 		if (zero == true && number == true) {
-			System.out.println("here");
 		    smY = i;
 		    smX = j;
 		}
 	    }
 	}
-	System.out.println(smY);
-	System.out.println(smX);
 	maze[smY][smX] = 0;
     }
 	
