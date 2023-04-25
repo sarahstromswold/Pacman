@@ -34,13 +34,15 @@ public class PacMan {
 	posYi = positionY;
     } //pacman constructor
 
+    public void centerPac() {
+	positionX = (tileX * 32) + 54;
+	positionY = 503 - ((14 - tileY) * 32);
+    }
+    
     public void update(double time, Maze m) {
 	//maybe make it not this same formula for posX--while abs.value of position has not changed by 32
-	System.out.println("tileX at beg" + tileX);
+	System.out.println("tileX at beg" + tileX + "tileY at beg" + tileY);
 	System.out.println("tileDir at beg" + tileDir);
-
-	positionY = positionY + (velocityY * time);
-	positionX = positionX + (velocityX * time);
 	
 	if (tileX < 0 || tileX > 24) {
 	    tileDir = 0;
@@ -50,48 +52,57 @@ public class PacMan {
 	} //updates pacman
 	
 	if (tileDir == 1) {
+	    if (tileY == 0) {
+		tileDir =0;
+	    }
 	    if (tileY > 0) {
 		if (m.maze[tileY - 1][tileX] == 1) {
-		    System.out.println("setting to zero 1");
+		    System.out.println("Setting to zero 1");
 		    tileDir = 0;
-		    System.out.println("tileY" + tileY);
-		    System.out.println("tileX" + tileX);
-		    System.out.println("maze at point" + m.maze[tileY][tileX + 1]);
 		}
 	    }
-	    if (tileDir == 1 && Math.abs(posYi - positionY) > 32) {
+	    if (tileY > 0 && tileDir == 1 && Math.abs(posYi - positionY) > 32) {
 		posYi = positionY;
 		tileY--;
 	    }
 	}
 	
 	if (tileDir == 2) {
+	    if (tileX == 0) {
+		tileDir = 0;
+	    }
 	    if (tileX > 0) { 
 		if (m.maze[tileY][tileX - 1] == 1) {
 		    System.out.println("setting to zero 2");
 		    tileDir = 0;
 		}
 	    }
-	    if (tileDir == 2 && Math.abs(posXi - positionX) > 32) {
+	    if (tileX > 0 && tileDir == 2 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
 		tileX--;
 	    }
 	}
 	
 	if (tileDir == 3) {
+	    if (tileY == 14) {
+		tileDir = 0;
+	    }
 	    if (tileY < 14) {
 		if (m.maze[tileY + 1][tileX] == 1) {
 		    System.out.println("setting to zero 3");
 		    tileDir = 0;
 		}
 	    }
-	    if (tileDir == 3 && Math.abs(posYi - positionY) > 32) {
+	    if (tileY < 14 && tileDir == 3 && Math.abs(posYi - positionY) > 32) {
 		posYi = positionY;
 		tileY++;
 	    }
 	}
 	
 	if (tileDir == 4) {
+	    if (tileX == 24) {
+		tileDir = 0;
+	    }
 	    if (tileX < 24) {
 		if (m.maze[tileY][tileX + 1] == 1) {
 		    System.out.println("tileY" + tileY);
@@ -101,14 +112,16 @@ public class PacMan {
 		    tileDir = 0;
 		}
 	    }
-	    if (tileDir == 4 && Math.abs(posXi - positionX) > 32) {
+	    if (tileX < 24 && tileDir == 4 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
 		tileX++;
 	    }
 	}
 
 	updateVel();
-	
+
+	positionY = positionY + (velocityY * time);
+	positionX = positionX + (velocityX * time);
 	/*double posXi = positionX;
 	double posYi = positionY;
 

@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 public class Main extends JPanel implements KeyListener{
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
-    public static final int FPS = 60;
+    public static final int FPS = 500;
     World world;
 
     public Main() {
@@ -47,6 +47,7 @@ public class Main extends JPanel implements KeyListener{
             world.pacman.startangle1 = 115;
             world.pacman.startangle2 = 65;
 	    world.pacman.tileDir = 1;
+	    world.pacman.centerPac();
         }
 	
         if (c == 'a' && world.pacman.tileX >= 1) { //move left
@@ -55,6 +56,7 @@ public class Main extends JPanel implements KeyListener{
             world.pacman.startangle1 = -25;
             world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
 	    world.pacman.tileDir = 2;
+	    world.pacman.centerPac();
         }
 	
         if (c == 's' && world.pacman.tileY < 24) { //move down
@@ -63,7 +65,7 @@ public class Main extends JPanel implements KeyListener{
             world.pacman.startangle1 = -65;
             world.pacman.startangle2 = -115;
 	    world.pacman.tileDir = 3;
-	    
+	    world.pacman.centerPac();
         }
 	
         if (c == 'd' && world.pacman.tileX < 24) { //move right
@@ -72,6 +74,7 @@ public class Main extends JPanel implements KeyListener{
             world.pacman.startangle1 = 25;
             world.pacman.startangle2 = -25;
 	    world.pacman.tileDir = 4;
+	    world.pacman.centerPac();
         }
     }
     class Runner implements Runnable {
