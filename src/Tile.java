@@ -132,7 +132,7 @@ public class Tile{
 		    s[i][j] = 1;
 		}
 		else {
-		    s[i][j] = 0;
+		    s[i][j] = 4;
 		}
 	    }
 	}

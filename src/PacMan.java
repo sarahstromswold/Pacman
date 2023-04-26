@@ -16,6 +16,7 @@ public class PacMan {
     int tileDir;
     double posXi;
     double posYi;
+    int numPoints;
     
     public PacMan(Maze m) {
         initialPositionX = 54;
@@ -32,11 +33,12 @@ public class PacMan {
 	tileDir = 0;
 	posXi = positionX;
 	posYi = positionY;
+	numPoints = 0;
     } //pacman constructor
 
     public void centerPac() {
-	positionX = (tileX * 32) + 54;
-	positionY = 503 - ((14 - tileY) * 32);
+	positionX = ((tileX * 32) + 54);
+	positionY = (503 - ((14 - tileY) * 32));
     }
     
     public void update(double time, Maze m) {
@@ -50,7 +52,12 @@ public class PacMan {
 	if (tileY < 0 || tileY > 14) {
 	    tileDir = 0;
 	} //updates pacman
-	
+
+	if (m.maze[tileY][tileX] == 3) {
+	    numPoints++;
+	    m.maze[tileY][tileX] = 0;
+	}
+	    
 	if (tileDir == 1) {
 	    if (tileY == 0) {
 		tileDir =0;
@@ -122,21 +129,7 @@ public class PacMan {
 
 	positionY = positionY + (velocityY * time);
 	positionX = positionX + (velocityX * time);
-	/*double posXi = positionX;
-	double posYi = positionY;
-
-	if (tileDir == 1 || tileDir == 3)  {
-	    while (Math.abs(posYi - positionY) < 32) {
-		positionY = positionY + (velocityY * time);
-	    }
-	}
-
-	else if (tileDir == 2 || tileDir == 4) {
-	    while (Math.abs(posXi - positionX) < 32) {
-		positionX = positionX + (velocityX * time);
-	    }
-	    }*/
-	//System.out.println("TileX: " + tileX + "TileY " + tileY);
+	
     }
 
     private void updateVel() {

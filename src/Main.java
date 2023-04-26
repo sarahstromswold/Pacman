@@ -105,9 +105,9 @@ public class Main extends JPanel implements KeyListener{
 class World {
     int height;
     int width;
-    int numPoints;
-    Fire fire[];
-    public Maze m = new Maze(50, 500);
+    //int numPoints;
+    //Fire fire[];
+    Maze m = new Maze(50, 500);
     PacMan pacman = new PacMan(m);
     //Points points;
     //Powerups power;
@@ -115,21 +115,23 @@ class World {
     public World(int initWidth, int initHeight) {
 	width = initWidth;
 	height = initHeight;
-	numPoints = 0;
-	fire = new Fire[5];
+	//numPoints = 0;
+	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
 	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
-	}
+	    }*/
     }
 
     public void drawWorld(Graphics g) {
 	//g.drawString("Points: " + numPoints);
 	pacman.draw(g); //pacman
-	for (int i = 0; i < 5; i++) {
+	/*for (int i = 0; i < 5; i++) {
 	    fire[i].draw(g);
-	}
+	    }*/
 	m.colorTiles(g);
 	g.drawRect(50, 52, 800, 480);
+	m.drawPoints(g);
+	g.drawString("" + pacman.numPoints, 10, 55);
 	//fire guys
 	//draw points
 	//draw powerups

@@ -63,10 +63,27 @@ public class Maze {
 		else if (maze[i][j] == 2) {
 		    g.setColor(Color.GRAY);
 		    g.fillRoundRect(x, y, 32, 32, 10, 10);
+		    maze[i][j] = 1;
+		}
+		else if (maze[i][j] > 2 && maze[i][j] != 4) {
+		    maze[i][j] = 0;
 		}
 		x += 32;
 	    }
 	    y -= 32;
+	}
+    }
+
+    //make this boolean, and return false to end game
+    public void drawPoints(Graphics g) {
+	for (int i = 0; i < 15; i++) {
+	    for (int j = 0; j < 25; j++) {
+		if (maze[i][j] == 0) {
+		    maze[i][j] = 3;
+		    g.setColor(Color.WHITE);
+		    g.fillOval(((j * 32) + 50 + 14), (500 - ((14 - i) * 32) + 14), 4, 4);
+		}
+	    }
 	}
     }
     
@@ -132,21 +149,21 @@ public class Maze {
 		}
 		else if (maze[i][j] == 1) {
 		    for (int r = i + 1; r >= i - 1; r--) {
-				for (int c = j - 1; c <= j + 1; c++) {
-					if (maze[r][c] == 0) {
-						zero = true;
-					}
-				}
+			for (int c = j - 1; c <= j + 1; c++) {
+			    if (maze[r][c] == 0) {
+				zero = true;
+			    }
 			}
-			for (int r = i + 1; r >= i - 1; r--) {
-				for (int c = j - 1; c <= j + 1; c++) {
+		    }
+		    for (int r = i + 1; r >= i - 1; r--) {
+			for (int c = j - 1; c <= j + 1; c++) {
 
-					if (maze[r][c] > 2 && maze[r][c] < current && zero == true) {
-						current = maze[r][c];
-						number = true;
-
-			    	}
-				}
+			    if (maze[r][c] > 2 && maze[r][c] < current && zero == true) {
+				current = maze[r][c];
+				number = true;
+				
+			    }
+			}
 		    }
 		}
 		if (zero == true && number == true) {
