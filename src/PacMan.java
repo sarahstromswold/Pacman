@@ -17,6 +17,7 @@ public class PacMan {
     double posXi;
     double posYi;
     int numPoints;
+    int lastTileDir;
     
     public PacMan(Maze m) {
         initialPositionX = 54;
@@ -34,6 +35,7 @@ public class PacMan {
 	posXi = positionX;
 	posYi = positionY;
 	numPoints = 0;
+	lastTileDir = 0;
     } //pacman constructor
 
     public void centerPac() {
@@ -47,10 +49,13 @@ public class PacMan {
 	System.out.println("tileDir at beg" + tileDir);
 	
 	if (tileX < 0 || tileX > 24) {
+	    lastTileDir = tileDir;
 	    tileDir = 0;
 	}
 	if (tileY < 0 || tileY > 14) {
+	    lastTileDir = tileDir;
 	    tileDir = 0;
+	    System.out.println(lastTileDir);
 	} //updates pacman
 
 	if (m.maze[tileY][tileX] == 3) {
@@ -60,11 +65,13 @@ public class PacMan {
 	    
 	if (tileDir == 1) {
 	    if (tileY == 0) {
-		tileDir =0;
+		lastTileDir = 1;
+		tileDir = 0;
 	    }
 	    if (tileY > 0) {
 		if (m.maze[tileY - 1][tileX] == 1) {
 		    System.out.println("Setting to zero 1");
+		    lastTileDir = 1;
 		    tileDir = 0;
 		}
 	    }
@@ -76,11 +83,13 @@ public class PacMan {
 	
 	if (tileDir == 2) {
 	    if (tileX == 0) {
+		lastTileDir = 2;
 		tileDir = 0;
 	    }
 	    if (tileX > 0) { 
 		if (m.maze[tileY][tileX - 1] == 1) {
 		    System.out.println("setting to zero 2");
+		    lastTileDir = 2;
 		    tileDir = 0;
 		}
 	    }
@@ -92,11 +101,13 @@ public class PacMan {
 	
 	if (tileDir == 3) {
 	    if (tileY == 14) {
+		lastTileDir = 3;
 		tileDir = 0;
 	    }
 	    if (tileY < 14) {
 		if (m.maze[tileY + 1][tileX] == 1) {
 		    System.out.println("setting to zero 3");
+		    lastTileDir = 3;
 		    tileDir = 0;
 		}
 	    }
@@ -108,6 +119,7 @@ public class PacMan {
 	
 	if (tileDir == 4) {
 	    if (tileX == 24) {
+		lastTileDir = 4;
 		tileDir = 0;
 	    }
 	    if (tileX < 24) {
@@ -116,6 +128,7 @@ public class PacMan {
 		    System.out.println("tileX" + tileX);
 		    System.out.println("maze at point" + m.maze[tileY][tileX + 1]);
 		    System.out.println("setting to zero 4");
+		    lastTileDir = 4;
 		    tileDir = 0;
 		}
 	    }
@@ -135,29 +148,32 @@ public class PacMan {
     }
 
     public void chomp() {
-	if (startangle1 == 0) {
-	    updateAngle(0);
+	if (tileDir == 0) {
+		updateAngle(0, lastTileDir);
+	}
+	else if (startangle1 == 0) {
+	    updateAngle(0, tileDir);
 	}
 	else {
-	    updateAngle(1);
+	    updateAngle(1, tileDir);
 	}
     }
 
-    public void updateAngle(int operation) {
+    public void updateAngle(int operation, int dir) {
 	if (operation == 0) {
-	    if (tileDir == 1) {
+	    if (dir == 1) {
 		startangle1 = 115;
 		startangle2 = 65;
 	    }
-	    if (tileDir == 2) {
+	    if (dir == 2) {
 		startangle1 = -25;
 		startangle2 = 25;
 	    }
-	    if (tileDir == 3) {
+	    if (dir == 3) {
 		startangle1 = -65;
 		startangle2 = -115;
 	    }
-	    if (tileDir == 4) {
+	    if (dir == 4) {
 		startangle1 = 25;
 		startangle2 = -25;
 	    }
