@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.util.Random;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.Font;
 
 public class Main extends JPanel implements KeyListener{
     public static final int WIDTH = 900;
@@ -131,8 +132,9 @@ class World {
 	m.colorTiles(g);
 	g.drawRect(50, 52, 800, 480);
 	m.drawPoints(g);
-	//SARAH CHRISTINE
-	g.drawString("Score: " + pacman.numPoints, 425, 40);
+    Font font = new Font("SansSerif", Font.BOLD, 25);
+    g.setFont(font);
+	g.drawString("Score: " + pacman.numPoints, 410, 40);
 	//fire guys
 	//draw points
 	//draw powerups
