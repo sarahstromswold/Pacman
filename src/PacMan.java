@@ -55,7 +55,7 @@ public class PacMan {
 
 	if (m.maze[tileY][tileX] == 3) {
 	    numPoints++;
-	    m.maze[tileY][tileX] = 0;
+	    m.maze[tileY][tileX] = 5;
 	}
 	    
 	if (tileDir == 1) {
@@ -127,11 +127,48 @@ public class PacMan {
 
 	updateVel();
 
+	chomp();
+	
 	positionY = positionY + (velocityY * time);
 	positionX = positionX + (velocityX * time);
 	
     }
 
+    public void chomp() {
+	if (startangle1 == 0) {
+	    updateAngle(0);
+	}
+	else {
+	    updateAngle(1);
+	}
+    }
+
+    public void updateAngle(int operation) {
+	if (operation == 0) {
+	    if (tileDir == 1) {
+		startangle1 = 115;
+		startangle2 = 65;
+	    }
+	    if (tileDir == 2) {
+		startangle1 = -25;
+		startangle2 = 25;
+	    }
+	    if (tileDir == 3) {
+		startangle1 = -65;
+		startangle2 = -115;
+	    }
+	    if (tileDir == 4) {
+		startangle1 = 25;
+		startangle2 = -25;
+	    }
+	}
+	else if (operation == 1) {
+	    startangle1 = 0;
+	    startangle2 = 0;
+	}
+    }
+			   
+	    
     private void updateVel() {
 	
 	if (tileDir == 0) {

@@ -48,6 +48,7 @@ public class Maze {
 	while(!checkMaze()) {
 	    fixMaze();
 	}
+	
     }
     
     public void colorTiles(Graphics g) {
@@ -65,7 +66,8 @@ public class Maze {
 		    g.fillRoundRect(x, y, 32, 32, 10, 10);
 		    maze[i][j] = 1;
 		}
-		else if (maze[i][j] > 2 && maze[i][j] != 4) {
+		//4 is the center cell values and 5 is the tiles that have had points eaten by pacman
+		else if (maze[i][j] > 2 && maze[i][j] != 4 && maze[i][j] != 5) {
 		    maze[i][j] = 0;
 		}
 		x += 32;
@@ -86,6 +88,7 @@ public class Maze {
 	    }
 	}
     }
+		   
     
     public void addTile(Tile t, int r, int c) {
 	for (int i = 0; i < 5; i++) {

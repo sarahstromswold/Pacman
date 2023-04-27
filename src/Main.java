@@ -131,7 +131,8 @@ class World {
 	m.colorTiles(g);
 	g.drawRect(50, 52, 800, 480);
 	m.drawPoints(g);
-	g.drawString("" + pacman.numPoints, 10, 55);
+	//SARAH CHRISTINE
+	g.drawString("Score: " + pacman.numPoints, 425, 40);
 	//fire guys
 	//draw points
 	//draw powerups
