@@ -107,7 +107,7 @@ class World {
     int height;
     int width;
     //int numPoints;
-    //Fire fire[];
+    Fire f;
     Maze m = new Maze(50, 500);
     PacMan pacman = new PacMan(m);
     //Points points;
@@ -116,6 +116,9 @@ class World {
     public World(int initWidth, int initHeight) {
 	width = initWidth;
 	height = initHeight;
+	int fposX = 406;
+	int fposY = 250;
+	f = new Fire(fposX, fposY);
 	//numPoints = 0;
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
@@ -132,9 +135,10 @@ class World {
 	m.colorTiles(g);
 	g.drawRect(50, 52, 800, 480);
 	m.drawPoints(g);
-    Font font = new Font("SansSerif", Font.BOLD, 25);
-    g.setFont(font);
+	Font font = new Font("SansSerif", Font.BOLD, 25);
+	g.setFont(font);
 	g.drawString("Score: " + pacman.numPoints, 410, 40);
+	f.draw(g);
 	//fire guys
 	//draw points
 	//draw powerups
@@ -148,5 +152,4 @@ class World {
 //        fire[i].update(this,time);
 //    } fire update
     }
-
 }

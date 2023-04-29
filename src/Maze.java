@@ -48,6 +48,7 @@ public class Maze {
 	while(!checkMaze()) {
 	    fixMaze();
 	}
+	prints();
 	
     }
     
@@ -62,9 +63,7 @@ public class Maze {
 		    g.fillRoundRect(x, y, 32, 32, 10, 10);
 		}
 		else if (maze[i][j] == 2) {
-		    g.setColor(Color.GRAY);
 		    g.fillRoundRect(x, y, 32, 32, 10, 10);
-		    maze[i][j] = 1;
 		}
 		//4 is the center cell values and 5 is the tiles that have had points eaten by pacman
 		else if (maze[i][j] > 2 && maze[i][j] != 4 && maze[i][j] != 5) {
@@ -164,7 +163,6 @@ public class Maze {
 			    if (maze[r][c] > 2 && maze[r][c] < current && zero == true) {
 				current = maze[r][c];
 				number = true;
-				
 			    }
 			}
 		    }
@@ -177,7 +175,7 @@ public class Maze {
 	}
 	maze[smY][smX] = 0;
     }
-	
+    
     public void prints() {
 	for (int i = 0; i < 15; i++) {
 	    System.out.print(i + "   ");

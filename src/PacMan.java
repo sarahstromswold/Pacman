@@ -45,9 +45,7 @@ public class PacMan {
     
     public void update(double time, Maze m) {
 	//maybe make it not this same formula for posX--while abs.value of position has not changed by 32
-	System.out.println("tileX at beg" + tileX + "tileY at beg" + tileY);
-	System.out.println("tileDir at beg" + tileDir);
-	
+        	
 	if (tileX < 0 || tileX > 24) {
 	    lastTileDir = tileDir;
 	    tileDir = 0;
@@ -55,7 +53,6 @@ public class PacMan {
 	if (tileY < 0 || tileY > 14) {
 	    lastTileDir = tileDir;
 	    tileDir = 0;
-	    System.out.println(lastTileDir);
 	} //updates pacman
 
 	if (m.maze[tileY][tileX] == 3) {
@@ -69,8 +66,7 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileY > 0) {
-		if (m.maze[tileY - 1][tileX] == 1) {
-		    System.out.println("Setting to zero 1");
+		if (m.maze[tileY - 1][tileX] == 1 || m.maze[tileY - 1][tileX] == 2) {
 		    lastTileDir = 1;
 		    tileDir = 0;
 		}
@@ -87,8 +83,7 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileX > 0) { 
-		if (m.maze[tileY][tileX - 1] == 1) {
-		    System.out.println("setting to zero 2");
+		if (m.maze[tileY][tileX - 1] == 1 || m.maze[tileY][tileX - 1] == 2) {
 		    lastTileDir = 2;
 		    tileDir = 0;
 		}
@@ -105,8 +100,7 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileY < 14) {
-		if (m.maze[tileY + 1][tileX] == 1) {
-		    System.out.println("setting to zero 3");
+		if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
 		    lastTileDir = 3;
 		    tileDir = 0;
 		}
@@ -123,11 +117,7 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileX < 24) {
-		if (m.maze[tileY][tileX + 1] == 1) {
-		    System.out.println("tileY" + tileY);
-		    System.out.println("tileX" + tileX);
-		    System.out.println("maze at point" + m.maze[tileY][tileX + 1]);
-		    System.out.println("setting to zero 4");
+		if (m.maze[tileY][tileX + 1] == 1 || m.maze[tileY][tileX + 1] == 2) {
 		    lastTileDir = 4;
 		    tileDir = 0;
 		}
@@ -149,7 +139,7 @@ public class PacMan {
 
     public void chomp() {
 	if (tileDir == 0) {
-		updateAngle(0, lastTileDir);
+	    updateAngle(0, lastTileDir);
 	}
 	else if (startangle1 == 0) {
 	    updateAngle(0, tileDir);
