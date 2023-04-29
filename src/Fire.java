@@ -8,23 +8,35 @@ public class Fire {
     int velocityX;
     int velocityY;
     int radius;
+    int roll;
+    int tileX;
+    int tileY;
     Random rand;
     Color color;
     
-    public Fire(int initialPositionX, int initialPositionY) {
+    public Fire(int initialPositionX, int initialPositionY, Color color) {
         rand = new Random();
         positionX = initialPositionX;
         positionY = initialPositionY;
         velocityX = 0;
-        velocityY = 0;
-	radius = 12;
-	color = new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat());
+        velocityY = -100;
+	    radius = 12;
+	    this.color = color;
+        tileX = 11;
+        tileY = 6;
     }
 
-//    public void update(double time) {
-//        positionX = positionX + (velocityX * time);
-//        positionY = positionY + (velocityY * time);
-//    }
+    public void update(double time, World world) {
+        positionX = positionX + (int)(velocityX * time);
+        positionY = positionY + (int)(velocityY * time);
+        roll = rand.nextInt(0,2);
+        if(world.m.maze[tileY][tileX] == 1) {
+            velocityY = 0;
+            velocityX = 0;
+
+        }
+
+    }
 
     public void draw(Graphics g) {
 	g.setColor(color);

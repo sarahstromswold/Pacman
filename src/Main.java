@@ -118,7 +118,7 @@ class World {
 	height = initHeight;
 	int fposX = 406;
 	int fposY = 250;
-	f = new Fire(fposX, fposY);
+	f = new Fire(fposX, fposY, new Color(157,196,168));
 	//numPoints = 0;
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
