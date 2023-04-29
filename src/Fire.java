@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.*;
 
@@ -36,14 +35,16 @@ public class Fire {
         positionY = positionY + (velocityY * time);
         if (velocityY < 0) {
             if (tileY == 0) {
+                System.out.println("horse");
                 direction(m);
             }
             else if (tileY > 0) {
                 if (m.maze[tileY - 1][tileX] == 1) {
+                    System.out.println("heck");
                     direction(m);
                 }
             }
-            else if (tileY > 0 && Math.abs(positionYi - positionY) > 32) {
+            if (tileY > 0 && Math.abs(positionYi - positionY) > 32) {
                 positionYi = positionY;
                 tileY--;
             }
@@ -58,7 +59,7 @@ public class Fire {
                     direction(m);
                 }
             }
-            else if (tileX > 0 && Math.abs(positionXi - positionX) > 32) {
+            if (tileX > 0 && Math.abs(positionXi - positionX) > 32) {
                 positionXi = positionX;
                 tileX--;
             }
@@ -73,7 +74,7 @@ public class Fire {
                     direction(m);
                 }
             }
-            else if (tileY < 14 && Math.abs(positionYi - positionY) > 32) {
+            if (tileY < 14 && Math.abs(positionYi - positionY) > 32) {
                 positionYi = positionY;
                 tileY++;
             }
@@ -84,11 +85,11 @@ public class Fire {
                 direction(m);
             }
             else if (tileX < 24) {
-                if (m.maze[tileY][tileX + 1] ==1){
+                if (m.maze[tileY][tileX + 1] == 1){
                     direction(m);
                 }
             }
-            else if (tileX < 24 && Math.abs(positionXi - positionX) > 32) {
+            if (tileX < 24 && Math.abs(positionXi - positionX) > 32) {
                 positionXi = positionX;
                 tileX++;
             }
@@ -116,6 +117,7 @@ public class Fire {
        if(velocityY < 0) {
            System.out.println(velocityY);
             if(m.maze[tileY][tileX + 1] != 1 && m.maze[tileY][tileX - 1] != 1) {
+                System.out.println("ass");
                 if(roll == 0) {
                     velocityX = -100;
                     velocityY = 0;
@@ -125,13 +127,19 @@ public class Fire {
                     velocityY = 0;
                 }
             }
-            else if (m.maze[tileY][tileX + 1] != 1){
-                velocityX = 100;
-                velocityY = 0;
+            else if(tileX < 24) {
+                if (m.maze[tileY][tileX + 1] != 1) {
+                    System.out.println("cheeks");
+                    velocityX = 100;
+                    velocityY = 0;
+                }
             }
-            else if (m.maze[tileY][tileX - 1] != 1){
-                velocityX = 100;
-                velocityY = 0;
+            else if(tileX > 0) {
+                if (m.maze[tileY][tileX - 1] != 1) {
+                    System.out.println(":>");
+                    velocityX = -100;
+                    velocityY = 0;
+                }
             }
             else {
                 velocityY = 100;
@@ -148,13 +156,17 @@ public class Fire {
                     velocityY = 0;
                 }
             }
-            else if (m.maze[tileY][tileX + 1] == 0) {
-                velocityX = 100;
-                velocityY = 0;
+            else if (tileX > 0) {
+                if (m.maze[tileY][tileX - 1] == 0) {
+                    velocityX = -100;
+                    velocityY = 0;
+                }
             }
-            else if (m.maze[tileY][tileX - 1] == 0) {
-                velocityX = -100;
-                velocityY = 0;
+            else if (tileX < 24) {
+                if (m.maze[tileY][tileX + 1] == 0) {
+                    velocityX = 100;
+                    velocityY = 0;
+                }
             }
             else {
                 velocityY = -100;
@@ -169,12 +181,18 @@ public class Fire {
                     velocityY = 100;
                     velocityX = 0;
                 }
-            } else if (m.maze[tileY + 1][tileX] == 0) {
+            }
+            else if(tileY < 14) {
+                if (m.maze[tileY + 1][tileX] == 0) {
                 velocityY = 100;
                 velocityX = 0;
-            } else if (m.maze[tileY - 1][tileX] == 0) {
-                velocityY = -100;
-                velocityX = 0;
+            }
+            }
+            else if(tileY > 0) {
+                if (m.maze[tileY - 1][tileX] == 0) {
+                    velocityY = -100;
+                    velocityX = 0;
+                }
             } else {
                 velocityX = -100;
             }
@@ -188,12 +206,18 @@ public class Fire {
                     velocityY = 100;
                     velocityX = 0;
                 }
-            } else if (m.maze[tileY + 1][tileX] == 0) {
-                velocityY = 100;
-                velocityX = 0;
-            } else if (m.maze[tileY - 1][tileX] == 0) {
-                velocityY = -100;
-                velocityX = 0;
+            }
+            else if (tileY < 14) {
+                if (m.maze[tileY + 1][tileX] == 0) {
+                    velocityY = 100;
+                    velocityX = 0;
+                }
+            }
+            else if (tileY > 0) {
+                if (m.maze[tileY - 1][tileX] == 0) {
+                    velocityY = -100;
+                    velocityX = 0;
+                }
             } else {
                 velocityX = 100;
             }
