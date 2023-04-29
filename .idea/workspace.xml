@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="fire guys" />
+    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="fires">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682785131541</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fires">
+      <created>1682795030992</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682795030992</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -116,6 +128,7 @@
     <MESSAGE value="not working maze bounds" />
     <MESSAGE value="demo" />
     <MESSAGE value="fire guys" />
-    <option name="LAST_COMMIT_MESSAGE" value="fire guys" />
+    <MESSAGE value="fires" />
+    <option name="LAST_COMMIT_MESSAGE" value="fires" />
   </component>
 </project>

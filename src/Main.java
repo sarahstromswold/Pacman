@@ -146,6 +146,7 @@ class World {
 
     public void update(double time) {
     pacman.update(time, m);
+    f.update(time,m);
     
     //update pacman
 //    for(int i = 0; i < 5; i++) {

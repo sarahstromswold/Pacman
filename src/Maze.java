@@ -48,7 +48,6 @@ public class Maze {
 	while(!checkMaze()) {
 	    fixMaze();
 	}
-	prints();
 	
     }
     
