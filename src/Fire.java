@@ -30,11 +30,11 @@ public class Fire {
         positionX = positionX + (int)(velocityX * time);
         positionY = positionY + (int)(velocityY * time);
         roll = rand.nextInt(0,2);
-        if(world.m.maze[tileY][tileX] == 1) {
+        if (world.m.maze[tileY][tileX] == 1) {
             velocityY = 0;
             velocityX = 0;
-
         }
+	
 
     }
 
