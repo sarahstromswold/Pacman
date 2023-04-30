@@ -48,7 +48,9 @@ public class Maze {
 	while(!checkMaze()) {
 	    fixMaze();
 	}
-	
+	prints();
+	lastTile();
+	prints();
     }
     
     public void colorTiles(Graphics g) {
@@ -104,7 +106,7 @@ public class Maze {
 	while(k > 2) {
 	    for (int i = 14; i >= 0; i--) {
 		for (int j = 0; j < 25; j++) {
-		    for(int r = i + 1; r > i - 2; r--) {
+		    for (int r = i + 1; r > i - 2; r--) {
 			for (int c = j - 1; c < j + 2; c++) {
 			    if (c >= 0 && c < 25 && r >= 0 && r < 15) {
 				if ((c == j - 1 && r == i + 1) || (c == j - 1 && r == i - 1) || (c == j + 1 && r == i + 1) || (c == j + 1 && r == i - 1)) {
@@ -174,12 +176,34 @@ public class Maze {
 	}
 	maze[smY][smX] = 0;
     }
+
+    public void lastTile() {
+	int lgDiff = 0;
+	int remX = 0;
+	int remY = 14;
+	for (int i = 1; i < 14; i++) {
+	    for (int j = 1; j < 24; j++) {
+		if (Math.abs(maze[i][j-1] - maze[i][j + 1]) > lgDiff && maze[i][j - 1] > 4 && maze[i][j + 1] > 4) {
+		    lgDiff = Math.abs(maze[i][j-1] - maze[i][j + 1]);
+		    remX = j;
+		    remY = i;
+		}
+	    }
+	}
+	maze[remY][remX] = 0;
+    }
+			
     
     public void prints() {
 	for (int i = 0; i < 15; i++) {
 	    System.out.print(i + "   ");
 	    for (int j = 0; j < 25; j++) {
-		System.out.print(maze[i][j] + "   ");
+		if (maze[i][j] > 100) {
+		    System.out.print(maze[i][j] + " ");
+		}
+		else {
+		    System.out.print(maze[i][j] + "   ");
+		}
 	    }
 	    System.out.println("");
 	}
