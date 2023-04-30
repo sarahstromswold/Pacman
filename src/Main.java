@@ -3,7 +3,6 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
-import java.util.Random;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
@@ -121,7 +120,6 @@ class World {
 	int fposY = 250;
 	f = new Fire(fposX, fposY, new Color(157,196,168));
     numLives = 4;
-	//numPoints = 0;
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
 	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
@@ -148,8 +146,12 @@ class World {
         g.fillArc((int)positionX + i * 15,(int)positionY,radius * 2, radius * 2,25,180);
         g.fillArc((int)positionX + i * 15,(int)positionY, radius * 2, radius * 2, -25,-180);
     }
+        if(numLives == 0) {
+            System.exit(0);
+            menu(g);
+
+        }
 	//fire guys
-	//draw points
 	//draw powerups
     }
 
@@ -159,9 +161,6 @@ class World {
     if(pacDeath()) {
         pacman = new PacMan(m);
         numLives--;
-        if(numLives == 0) {
-            //end game
-        }
     }
     
     //update pacman
@@ -176,5 +175,8 @@ class World {
         else {
             return false;
         }
+    }
+    public void menu(Graphics g) {
+
     }
 }
