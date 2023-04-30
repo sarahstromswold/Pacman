@@ -110,6 +110,7 @@ class World {
     Fire f;
     Maze m = new Maze(50, 500);
     PacMan pacman = new PacMan(m);
+    int numLives;
     //Points points;
     //Powerups power;
 
@@ -119,6 +120,7 @@ class World {
 	int fposX = 406;
 	int fposY = 250;
 	f = new Fire(fposX, fposY, new Color(157,196,168));
+    numLives = 4;
 	//numPoints = 0;
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
@@ -127,7 +129,6 @@ class World {
     }
 
     public void drawWorld(Graphics g) {
-	//g.drawString("Points: " + numPoints);
 	pacman.draw(g); //pacman
 	/*for (int i = 0; i < 5; i++) {
 	    fire[i].draw(g);
@@ -139,6 +140,14 @@ class World {
 	g.setFont(font);
 	g.drawString("Score: " + pacman.numPoints, 410, 40);
 	f.draw(g);
+    int positionX = 40;
+    int positionY = 540;
+    int radius = 6;
+    for(int i = 1; i < numLives; i++) {
+        g.setColor(Color.YELLOW);
+        g.fillArc((int)positionX + i * 15,(int)positionY,radius * 2, radius * 2,25,180);
+        g.fillArc((int)positionX + i * 15,(int)positionY, radius * 2, radius * 2, -25,-180);
+    }
 	//fire guys
 	//draw points
 	//draw powerups
@@ -147,10 +156,25 @@ class World {
     public void update(double time) {
     pacman.update(time, m);
     f.update(time,m);
+    if(pacDeath()) {
+        pacman = new PacMan(m);
+        numLives--;
+        if(numLives == 0) {
+            //end game
+        }
+    }
     
     //update pacman
 //    for(int i = 0; i < 5; i++) {
 //        fire[i].update(this,time);
 //    } fire update
+    }
+    public boolean pacDeath() {
+        if(pacman.tileX == f.tileX && pacman.tileY == f.tileY) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -15,6 +15,7 @@ public class Fire {
     Color color;
     double positionXi;
     double positionYi;
+    int numTilesMoved;
 
     public Fire(int initialPositionX, int initialPositionY, Color color) {
         rand = new Random();
@@ -28,11 +29,16 @@ public class Fire {
         positionXi = positionX;
         tileX = 11;
         tileY = 6;
+        numTilesMoved = 0;
     }
 
     public void update(double time, Maze m) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
+        if (numTilesMoved == 5) {
+            direction(m);
+            numTilesMoved = 0;
+        }
         if (velocityY < 0) {
             if (tileY == 0) {
                 System.out.println("horse");
@@ -47,40 +53,43 @@ public class Fire {
             if (tileY > 0 && Math.abs(positionYi - positionY) > 32) {
                 positionYi = positionY;
                 tileY--;
+                numTilesMoved++;
             }
         } //fire guy moves up
 
-        if (velocityX < 0) {
+        else if (velocityX < 0) {
             if (tileX == 0) {
                 direction(m);
             }
             else if (tileX > 0) {
-                if (m.maze[tileY][tileX + 1] == 1) {
+                if (m.maze[tileY][tileX - 1] == 1) {
                     direction(m);
                 }
             }
             if (tileX > 0 && Math.abs(positionXi - positionX) > 32) {
                 positionXi = positionX;
                 tileX--;
+                numTilesMoved++;
             }
         } //fire guy moves left
 
-        if (velocityY > 0) {
+        else if (velocityY > 0) {
             if (tileY == 14) {
                 direction(m);
             }
             else if (tileY < 14) {
-                if (m.maze[tileY + 1][tileX] == 1) {
+                if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
                     direction(m);
                 }
             }
             if (tileY < 14 && Math.abs(positionYi - positionY) > 32) {
                 positionYi = positionY;
                 tileY++;
+                numTilesMoved++;
             }
         } //fire guy moves down
 
-        if (velocityX > 0) {
+        else if (velocityX > 0) {
             if (tileX == 24) {
                 direction(m);
             }
@@ -92,8 +101,10 @@ public class Fire {
             if (tileX < 24 && Math.abs(positionXi - positionX) > 32) {
                 positionXi = positionX;
                 tileX++;
+                numTilesMoved++;
             }
         } //fire guy moves right
+
     }
 
     public void draw(Graphics g) {
@@ -112,116 +123,28 @@ public class Fire {
     } //draw fire
 
     public void direction(Maze m) {
-        roll = rand.nextInt(0, 2);
-        System.out.println(velocityY);
-       if(velocityY < 0) {
-           System.out.println(velocityY);
-            if(m.maze[tileY][tileX + 1] != 1 && m.maze[tileY][tileX - 1] != 1) {
-                System.out.println("ass");
-                if(roll == 0) {
-                    velocityX = -100;
-                    velocityY = 0;
-                }
-                else if(roll == 1){
-                    velocityX = 100;
-                    velocityY = 0;
-                }
-            }
-            else if(tileX < 24) {
-                if (m.maze[tileY][tileX + 1] != 1) {
-                    System.out.println("cheeks");
-                    velocityX = 100;
-                    velocityY = 0;
-                }
-            }
-            else if(tileX > 0) {
-                if (m.maze[tileY][tileX - 1] != 1) {
-                    System.out.println(":>");
-                    velocityX = -100;
-                    velocityY = 0;
-                }
-            }
-            else {
-                velocityY = 100;
-            }
+        roll = rand.nextInt(1, 5);
+        System.out.println(roll);
+        if (roll == 1 && velocityX != -100) {
+            velocityX = -100;
+            velocityY = 0;
         }
-        else if(velocityY > 0) {
-            if (m.maze[tileY][tileX + 1] == 0 && m.maze[tileY][tileX - 1] == 0) {
-                if (roll == 0) {
-                    velocityX = -100;
-                    velocityY = 0;
-                }
-                else if (roll == 1) {
-                    velocityX = 100;
-                    velocityY = 0;
-                }
-            }
-            else if (tileX > 0) {
-                if (m.maze[tileY][tileX - 1] == 0) {
-                    velocityX = -100;
-                    velocityY = 0;
-                }
-            }
-            else if (tileX < 24) {
-                if (m.maze[tileY][tileX + 1] == 0) {
-                    velocityX = 100;
-                    velocityY = 0;
-                }
-            }
-            else {
-                velocityY = -100;
-            }
+        else if (roll == 2 && velocityY != -100) {
+            velocityY = -100;
+            velocityX = 0;
         }
-        else if(velocityX < 0) {
-            if (m.maze[tileY + 1][tileX] == 0 && m.maze[tileY - 1][tileX] == 0) {
-                if (roll == 0) {
-                    velocityY = -100;
-                    velocityX = 0;
-                } else if (roll == 1) {
-                    velocityY = 100;
-                    velocityX = 0;
-                }
-            }
-            else if(tileY < 14) {
-                if (m.maze[tileY + 1][tileX] == 0) {
-                velocityY = 100;
-                velocityX = 0;
-            }
-            }
-            else if(tileY > 0) {
-                if (m.maze[tileY - 1][tileX] == 0) {
-                    velocityY = -100;
-                    velocityX = 0;
-                }
-            } else {
-                velocityX = -100;
-            }
+        else if (roll == 3 && velocityX != 100) {
+            velocityX = 100;
+            velocityY = 0;
         }
-        else if(velocityX > 0) {
-            if (m.maze[tileY + 1][tileX] == 0 && m.maze[tileY - 1][tileX] == 0) {
-                if (roll == 0) {
-                    velocityY = -100;
-                    velocityX = 0;
-                } else if (roll == 1) {
-                    velocityY = 100;
-                    velocityX = 0;
-                }
-            }
-            else if (tileY < 14) {
-                if (m.maze[tileY + 1][tileX] == 0) {
-                    velocityY = 100;
-                    velocityX = 0;
-                }
-            }
-            else if (tileY > 0) {
-                if (m.maze[tileY - 1][tileX] == 0) {
-                    velocityY = -100;
-                    velocityX = 0;
-                }
-            } else {
-                velocityX = 100;
-            }
+        else if (roll == 4 && velocityY != 100) {
+            velocityX = 0;
+            velocityY = 100;
+        }
+        else {
+            direction(m);
         }
     }
+
 }
 
