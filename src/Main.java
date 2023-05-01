@@ -6,8 +6,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
+import java.awt.event.MouseListener;
 
-public class Main extends JPanel implements KeyListener{
+public class Main extends JPanel implements KeyListener, MouseListener{
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
     public static final int FPS = 500;
@@ -119,7 +120,7 @@ class World {
 	int fposX = 406;
 	int fposY = 250;
 	f = new Fire(fposX, fposY, new Color(157,196,168));
-    numLives = 4;
+	numLives = 1;
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
 	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
@@ -127,31 +128,41 @@ class World {
     }
 
     public void drawWorld(Graphics g) {
-	pacman.draw(g); //pacman
-	/*for (int i = 0; i < 5; i++) {
-	    fire[i].draw(g);
-	    }*/
-	m.colorTiles(g);
-	g.drawRect(50, 52, 800, 480);
-	m.drawPoints(g);
-	Font font = new Font("SansSerif", Font.BOLD, 25);
-	g.setFont(font);
-	g.drawString("Score: " + pacman.numPoints, 410, 40);
-	f.draw(g);
-    int positionX = 40;
-    int positionY = 540;
-    int radius = 6;
-    for(int i = 1; i < numLives; i++) {
-        g.setColor(Color.YELLOW);
-        g.fillArc((int)positionX + i * 15,(int)positionY,radius * 2, radius * 2,25,180);
-        g.fillArc((int)positionX + i * 15,(int)positionY, radius * 2, radius * 2, -25,-180);
-    }
-        if(numLives == 0) {
-            System.exit(0);
+	if(numLives == 0) {
+            //System.exit(0);
+	    Font font = new Font("SansSerif", Font.BOLD, 25);
+	    g.setColor(Color.BLUE);
+	    g.fillRoundRect(400, 200, 100, 40, 20, 20);
+	    g.fillRoundRect(400, 400, 100, 40, 20, 20);
+	    g.setColor(Color.WHITE);
+	    g.drawString("Play Again", 400, 200);
+	    g.drawString("Exit", 400, 400);
             menu(g);
+	    
 
         }
-	//fire guys
+	else {
+	    pacman.draw(g); //pacman
+	    /*for (int i = 0; i < 5; i++) {
+	      fire[i].draw(g);
+	      }*/
+	    m.colorTiles(g);
+	    g.drawRect(50, 52, 800, 480);
+	    m.drawPoints(g);
+	    Font font = new Font("SansSerif", Font.BOLD, 25);
+	    g.setFont(font);
+	    g.drawString("Score: " + pacman.numPoints, 410, 40);
+	    f.draw(g);
+	    int positionX = 40;
+	    int positionY = 540;
+	    int radius = 6;
+	    for(int i = 1; i < numLives; i++) {
+		g.setColor(Color.YELLOW);
+		g.fillArc((int)positionX + i * 15,(int)positionY,radius * 2, radius * 2,25,180);
+		g.fillArc((int)positionX + i * 15,(int)positionY, radius * 2, radius * 2, -25,-180);
+	    }
+	}
+	        
 	//draw powerups
     }
 
@@ -179,4 +190,5 @@ class World {
     public void menu(Graphics g) {
 
     }
+    
 }
