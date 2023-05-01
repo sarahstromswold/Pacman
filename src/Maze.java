@@ -50,6 +50,7 @@ public class Maze {
 	}
 	prints();
 	lastTile();
+	lastTile();
 	prints();
     }
     
