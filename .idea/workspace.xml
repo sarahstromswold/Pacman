@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="stuff">
+    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="it shuts down :)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -139,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682888745738</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="it shuts down :)">
+      <created>1682896421236</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682896421236</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -149,6 +156,7 @@
     <MESSAGE value="fire guys" />
     <MESSAGE value="fires" />
     <MESSAGE value="stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
+    <MESSAGE value="it shuts down :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="it shuts down :)" />
   </component>
 </project>
