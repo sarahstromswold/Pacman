@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 
-public class Main extends JPanel implements KeyListener, MouseListener{
+public class Main extends JPanel implements KeyListener{
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
     public static final int FPS = 500;
@@ -101,6 +101,21 @@ public class Main extends JPanel implements KeyListener, MouseListener{
         super.addNotify();
         requestFocus();
     }
+    /*public void mouseClicked(MouseEvent e) {
+
+    }
+    public void mouseEntered(MouseEvent e) {
+	
+    }
+    public void mouseExited(MouseEvent e) {
+
+    }
+    public void mousePressed(MouseEvent e) {
+
+    }
+    public void mouseReleased(MouseEvent e) {
+
+    }*/
 }
 
 class World {

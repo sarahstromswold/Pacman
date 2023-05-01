@@ -188,6 +188,11 @@ public class Maze {
 		    remX = j;
 		    remY = i;
 		}
+		if (Math.abs(maze[i + 1][j] - maze[i - 1][j]) > lgDiff && maze[i + 1][j] > 4 && maze[i - 1][j] > 4){
+		    lgDiff = Math.abs(maze[i + 1][j] - maze[i - 1][j]);
+		    remX = j;
+		    remY = i;
+		}		    
 	    }
 	}
 	maze[remY][remX] = 0;
