@@ -105,16 +105,16 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = 0;
         int y = 0;
+        int hscore;
         x = e.getX();
         y = e.getY();
         if (x > 350 && x < 550) {
             if(y >= 50 && y <= 140) {
                 Main main = new Main();
                 main.main(null);
-                //play again
             } //Play again button
             else if(y >= 250 && y <= 340) {
-                //get high score
+                hscore = world.highscore.loadHighScore("Highscore.txt");
             } //High score button
             else if(y >= 450 && y <= 540) {
                 System.exit(0);
@@ -142,6 +142,7 @@ class World {
     Fire f; //fire guy
     Maze m = new Maze(50, 500); //maze
     PacMan pacman = new PacMan(m); //pacman
+    HighScore highscore = new HighScore(pacman);
     int numLives; //lives
 
     //Powerups power;
@@ -209,6 +210,7 @@ class World {
         }
     } //resets pacman when he dies
     public void menu(Graphics g) {
+        highscore.saveHighScore("Highscore.txt");
         Font font = new Font("SansSerif", Font.BOLD, 35);
         g.setFont(font);
         g.setColor(Color.BLUE);
