@@ -50,10 +50,8 @@ public class Maze {
 	while(!checkMaze()) {
 	    fixMaze();
 	}
-	prints();
 	lastTile();
 	lastTile();
-	prints();
     }
     
     public void colorTiles(Graphics g) {
@@ -85,8 +83,7 @@ public class Maze {
 	for (int i = 0; i < 15; i++) {
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 0) {
-		    maze[i][j] = 3;
-		    if (numPlaced < 5) {
+		    if (numPlaced < 10) {
 		        p.drawNormal(i, j, g);
 			numPlaced++;
 		    }
@@ -94,6 +91,7 @@ public class Maze {
 			p.drawWalls(i, j, g);
 			numPlaced = 0;
 		    }
+		    maze[i][j] = 3;
 		}
 	    }
 	}
