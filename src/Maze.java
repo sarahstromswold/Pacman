@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Maze {
     int[][] maze;
+    Powerups p;
     int x;
     int y;
     int initX;
@@ -11,6 +12,7 @@ public class Maze {
     
     public Maze(int initX, int initY) {
 	maze = new int[15][25];
+	p = new Powerups();
 	randomizeMaze();
       	this.initX = initX;
 	this.initY = initY;
@@ -79,12 +81,19 @@ public class Maze {
 
     //make this boolean, and return false to end game
     public void drawPoints(Graphics g) {
+	int numPlaced = 0;
 	for (int i = 0; i < 15; i++) {
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 0) {
 		    maze[i][j] = 3;
-		    g.setColor(Color.WHITE);
-		    g.fillOval(((j * 32) + 50 + 14), (500 - ((14 - i) * 32) + 14), 4, 4);
+		    if (numPlaced < 5) {
+		        p.drawNormal(i, j, g);
+			numPlaced++;
+		    }
+		    else if (numPlaced == 10) {
+			p.drawWalls(i, j, g);
+			numPlaced = 0;
+		    }
 		}
 	    }
 	}

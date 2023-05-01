@@ -55,11 +55,12 @@ public class PacMan {
 	    tileDir = 0;
 	} //updates pacman
 
-	if (m.maze[tileY][tileX] == 3) {
+	if (m.maze[tileY][tileX] == 3 && m.p.powerUps[tileY][tileX] == 1) {
 	    numPoints++;
 	    m.maze[tileY][tileX] = 5;
 	}
-	    
+
+	//make 2 diff methods-one for x and y
 	if (tileDir == 1) {
 	    if (tileY == 0) {
 		lastTileDir = 1;
@@ -206,4 +207,5 @@ public class PacMan {
         g.fillArc((int)positionX,(int)positionY, radius * 2, radius * 2, startangle2,-180);
     } //draws pacman
 
+    
 }
