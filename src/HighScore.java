@@ -11,13 +11,15 @@ public class HighScore {
     }
     public void saveHighScore(String fileName){
         int highscore = 0;
+        highscore = loadHighScore("Highscore.txt");
         try{
             PrintWriter writer = new PrintWriter(fileName);
-            highscore = loadHighScore("Highscore.txt");
             if(pacman.numPoints > highscore) {
                 writer.write(pacman.numPoints + " ");
-                writer.close();
+            } else{
+                writer.write(highscore + " ");
             }
+            writer.close();
         }
         catch (FileNotFoundException e){
             System.out.println("Badness in savePointToFile");
@@ -29,14 +31,19 @@ public class HighScore {
 
         try{
             Scanner s = new Scanner(new File(fileName));
+//            System.out.println(s.hasNextInt());
             while(s.hasNextInt()) {
                 highscore = s.nextInt();
+                System.out.println(highscore);
+                s.nextLine();
             }
+            s.close();
         }
         catch (Exception e){
             System.out.println("Badness in loadPointFromFile");
             System.err.println(e);
         }
+        System.out.println("will return:" + highscore);
         return highscore;
 
 

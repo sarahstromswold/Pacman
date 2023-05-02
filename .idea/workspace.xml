@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="it shuts down :)">
-      <change afterPath="$PROJECT_DIR$/src/HighScore.java" afterDir="false" />
+    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="sorta highscore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HighScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HighScore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacMan.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682967047963</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="sorta highscore">
+      <created>1682978099567</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682978099567</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -165,6 +175,7 @@
     <MESSAGE value="fires" />
     <MESSAGE value="stuff" />
     <MESSAGE value="it shuts down :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="it shuts down :)" />
+    <MESSAGE value="sorta highscore" />
+    <option name="LAST_COMMIT_MESSAGE" value="sorta highscore" />
   </component>
 </project>

@@ -15,6 +15,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public static final int FPS = 500;
     World world;
 
+
     public Main() {
 	world = new World (WIDTH, HEIGHT);
 	addKeyListener(this);
@@ -48,8 +49,8 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             //world.pacman.velocityX = 0;
             world.pacman.startangle1 = 115;
             world.pacman.startangle2 = 65;
-	    world.pacman.tileDir = 1;
-	    world.pacman.centerPac();
+	        world.pacman.tileDir = 1;
+
         } //move up
 	
         if (c == 'a' && world.pacman.tileX >= 1) {
@@ -58,7 +59,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = -25;
             world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
 	    world.pacman.tileDir = 2;
-	    world.pacman.centerPac();
         } //move left
 	
         if (c == 's' && world.pacman.tileY < 24) {
@@ -67,7 +67,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = -65;
             world.pacman.startangle2 = -115;
 	    world.pacman.tileDir = 3;
-	    world.pacman.centerPac();
         } //move down
 	
         if (c == 'd' && world.pacman.tileX < 24) {
@@ -76,7 +75,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = 25;
             world.pacman.startangle2 = -25;
 	    world.pacman.tileDir = 4;
-	    world.pacman.centerPac();
         } //move right
     }
     class Runner implements Runnable {
@@ -103,22 +101,27 @@ public class Main extends JPanel implements KeyListener, MouseListener{
         requestFocus();
     }
     public void mouseClicked(MouseEvent e) {
-        int x = 0;
-        int y = 0;
-        int hscore;
-        x = e.getX();
-        y = e.getY();
-        if (x > 350 && x < 550) {
-            if(y >= 50 && y <= 140) {
-                Main main = new Main();
-                main.main(null);
-            } //Play again button
-            else if(y >= 250 && y <= 340) {
-                hscore = world.highscore.loadHighScore("Highscore.txt");
-            } //High score button
-            else if(y >= 450 && y <= 540) {
-                System.exit(0);
-            } //Quit button
+        int x = e.getX();
+        int y = e.getY();
+        if(world.highscoreScreen) {
+            if(x > 650 && x < 850 && y > 450 && y < 540) {
+                world.highscoreScreen = false;
+            } //exit button
+        }
+        else {
+            if (x > 350 && x < 550) {
+                if (y >= 50 && y <= 140) {
+                    Main main = new Main();
+                    main.main(null);
+                } //Play again button
+                else if (y >= 250 && y <= 340) {
+                    world.highscoreScreen = true;
+                    world.currHighScore = world.highscore.loadHighScore("Highscore.txt");
+                } //High score button
+                else if (y >= 450 && y <= 540) {
+                    System.exit(0);
+                } //Quit button
+            }
         }
 
     } //used for the menu buttons
@@ -144,6 +147,8 @@ class World {
     PacMan pacman = new PacMan(m); //pacman
     HighScore highscore = new HighScore(pacman);
     int numLives; //lives
+    boolean highscoreScreen = false;
+    int currHighScore;
 
     //Powerups power;
 
@@ -153,7 +158,7 @@ class World {
 	int fposX = 406;
 	int fposY = 250;
 	f = new Fire(fposX, fposY, new Color(157,196,168)); //fire guy
-	numLives = 3; //amount of lives
+	numLives = 1; //amount of lives
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
 	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
@@ -161,9 +166,15 @@ class World {
     }
 
     public void drawWorld(Graphics g) {
+
 	if(numLives == 0) {
+        if (highscoreScreen) {
+            highscore(g);
+        }
+        else {
             menu(g);
-        } //when out of lives, menu pops up
+        }
+    } //when out of lives, menu pops up
 
 	else {
 	    pacman.draw(g); //pacman
@@ -196,6 +207,9 @@ class World {
     if(pacDeath()) {
         pacman = new PacMan(m);
         numLives--;
+        if(numLives == 0) {
+            highscore.saveHighScore("Highscore.txt");
+        }
     } //when he dies, lives decrease
 //    for(int i = 0; i < 5; i++) {
 //        fire[i].update(this,time);
@@ -210,7 +224,6 @@ class World {
         }
     } //resets pacman when he dies
     public void menu(Graphics g) {
-        highscore.saveHighScore("Highscore.txt");
         Font font = new Font("SansSerif", Font.BOLD, 35);
         g.setFont(font);
         g.setColor(Color.BLUE);
@@ -222,5 +235,14 @@ class World {
         g.drawString("High Score", 354, 310);
         g.drawString("Exit", 415, 510);
     } //creates a menu
+    public void highscore(Graphics g) {
+        Font font = new Font("SansSerif", Font.BOLD, 35);
+        g.setFont(font);
+        g.setColor(Color.RED);
+        g.fillRoundRect(650, 450, 200, 90, 20, 20);
+        g.setColor(Color.WHITE);
+        g.drawString("EXIT", 710, 505);
+        g.drawString("Highscore: " + currHighScore, 300,50);
+    }
     
 }

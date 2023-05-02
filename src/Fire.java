@@ -41,12 +41,10 @@ public class Fire {
         }
         if (velocityY < 0) {
             if (tileY == 0) {
-                System.out.println("horse");
                 direction(m);
             }
             else if (tileY > 0) {
                 if (m.maze[tileY - 1][tileX] == 1) {
-                    System.out.println("heck");
                     direction(m);
                 }
             }
@@ -124,7 +122,6 @@ public class Fire {
 
     public void direction(Maze m) {
         roll = rand.nextInt(1, 5);
-        System.out.println(roll);
         if (roll == 1 && velocityX != -100) {
             velocityX = -100;
             velocityY = 0;

@@ -10,7 +10,6 @@ public class PacMan {
     double velocityY;
     int startangle1;
     int startangle2;
-    int numLives;
     int tileX;
     int tileY;
     int tileDir;
@@ -18,6 +17,7 @@ public class PacMan {
     double posYi;
     int numPoints;
     int lastTileDir;
+	int nextTileDir;
     
     public PacMan(Maze m) {
         initialPositionX = 54;
@@ -36,6 +36,7 @@ public class PacMan {
 	posYi = positionY;
 	numPoints = 0;
 	lastTileDir = 0;
+	nextTileDir = 0;
     } //pacman constructor
 
     public void centerPac() {
@@ -56,82 +57,19 @@ public class PacMan {
 	} //updates pacman
 
 	if (m.maze[tileY][tileX] == 0) {
-	    System.out.println("here");
 	    if (m.p.powerUps[tileY][tileX] == 1) {
 		m.p.powerUps[tileY][tileX] = 0;
 	    }
 	    numPoints++;
 	    m.maze[tileY][tileX] = 5;
 	}
-
+	if(tileDir == 2 || tileDir == 4) {
+		horizontal(m);
+	}
+	if(tileDir == 1 || tileDir == 3) {
+		vertical(m);
+	}
 	//make 2 diff methods-one for x and y
-	if (tileDir == 1) {
-	    if (tileY == 0) {
-		lastTileDir = 1;
-		tileDir = 0;
-	    }
-	    if (tileY > 0) {
-		if (m.maze[tileY - 1][tileX] == 1 || m.maze[tileY - 1][tileX] == 2) {
-		    lastTileDir = 1;
-		    tileDir = 0;
-		}
-	    }
-	    if (tileY > 0 && tileDir == 1 && Math.abs(posYi - positionY) > 32) {
-		posYi = positionY;
-		tileY--;
-	    }
-	}
-	
-	if (tileDir == 2) {
-	    if (tileX == 0) {
-		lastTileDir = 2;
-		tileDir = 0;
-	    }
-	    if (tileX > 0) { 
-		if (m.maze[tileY][tileX - 1] == 1 || m.maze[tileY][tileX - 1] == 2) {
-		    lastTileDir = 2;
-		    tileDir = 0;
-		}
-	    }
-	    if (tileX > 0 && tileDir == 2 && Math.abs(posXi - positionX) > 32) {
-		posXi = positionX;
-		tileX--;
-	    }
-	}
-	
-	if (tileDir == 3) {
-	    if (tileY == 14) {
-		lastTileDir = 3;
-		tileDir = 0;
-	    }
-	    if (tileY < 14) {
-		if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
-		    lastTileDir = 3;
-		    tileDir = 0;
-		}
-	    }
-	    if (tileY < 14 && tileDir == 3 && Math.abs(posYi - positionY) > 32) {
-		posYi = positionY;
-		tileY++;
-	    }
-	}
-	
-	if (tileDir == 4) {
-	    if (tileX == 24) {
-		lastTileDir = 4;
-		tileDir = 0;
-	    }
-	    if (tileX < 24) {
-		if (m.maze[tileY][tileX + 1] == 1 || m.maze[tileY][tileX + 1] == 2) {
-		    lastTileDir = 4;
-		    tileDir = 0;
-		}
-	    }
-	    if (tileX < 24 && tileDir == 4 && Math.abs(posXi - positionX) > 32) {
-		posXi = positionX;
-		tileX++;
-	    }
-	}
 
 	updateVel();
 
@@ -141,6 +79,79 @@ public class PacMan {
 	positionX = positionX + (velocityX * time);
 	
     }
+	public void horizontal(Maze m) {
+		if (tileDir == 2) {
+			if (tileX == 0) {
+				lastTileDir = 2;
+				tileDir = 0;
+			}
+			if (tileX > 0) {
+				if (m.maze[tileY][tileX - 1] == 1 || m.maze[tileY][tileX - 1] == 2) {
+					lastTileDir = 2;
+					tileDir = 0;
+				}
+			}
+			if (tileX > 0 && tileDir == 2 && Math.abs(posXi - positionX) > 32) {
+				posXi = positionX;
+				tileX--;
+				centerPac();
+			}
+		}//left
+		if (tileDir == 4) {
+			if (tileX == 24) {
+				lastTileDir = 4;
+				tileDir = 0;
+			}
+			if (tileX < 24) {
+				if (m.maze[tileY][tileX + 1] == 1 || m.maze[tileY][tileX + 1] == 2) {
+					lastTileDir = 4;
+					tileDir = 0;
+				}
+			}
+			if (tileX < 24 && tileDir == 4 && Math.abs(posXi - positionX) > 32) {
+				posXi = positionX;
+				tileX++;
+				centerPac();
+			}
+		}//right
+
+	}
+	public void vertical(Maze m) {
+		if (tileDir == 1) {
+			if (tileY == 0) {
+				lastTileDir = 1;
+				tileDir = 0;
+			}
+			if (tileY > 0) {
+				if (m.maze[tileY - 1][tileX] == 1 || m.maze[tileY - 1][tileX] == 2) {
+					lastTileDir = 1;
+					tileDir = 0;
+				}
+			}
+			if (tileY > 0 && tileDir == 1 && Math.abs(posYi - positionY) > 32) {
+				posYi = positionY;
+				tileY--;
+				centerPac();
+			}
+		} //up
+		if (tileDir == 3) {
+			if (tileY == 14) {
+				lastTileDir = 3;
+				tileDir = 0;
+			}
+			if (tileY < 14) {
+				if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
+					lastTileDir = 3;
+					tileDir = 0;
+				}
+			}
+			if (tileY < 14 && tileDir == 3 && Math.abs(posYi - positionY) > 32) {
+				posYi = positionY;
+				tileY++;
+				centerPac();
+			}
+		} //down
+	}
 
     public void chomp() {
 	if (tileDir == 0) {

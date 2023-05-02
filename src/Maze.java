@@ -95,7 +95,6 @@ public class Maze {
 			    numPlaced = 0;
 			}
 			maze[i][j] = 3;
-			System.out.println(done);
 		    }
 		    else {
 			if (p.powerUps[i][j] == 1) {
