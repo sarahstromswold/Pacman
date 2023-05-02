@@ -9,11 +9,13 @@ public class Maze {
     int y;
     int initX;
     int initY;
+    int done;
     
     public Maze(int initX, int initY) {
 	maze = new int[15][25];
 	p = new Powerups();
 	randomizeMaze();
+	done = 0;
       	this.initX = initX;
 	this.initY = initY;
 	x = initX;
@@ -83,18 +85,30 @@ public class Maze {
 	for (int i = 0; i < 15; i++) {
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 0) {
-		    if (numPlaced < 10) {
-		        p.drawNormal(i, j, g);
-			numPlaced++;
+		    if (done == 0) {
+			if (numPlaced < 10) {
+			    p.drawNormal(i, j, g);
+			    numPlaced++;
+			}
+			else if (numPlaced == 10) {
+			    p.drawWalls(i, j, g);
+			    numPlaced = 0;
+			}
+			maze[i][j] = 3;
+			System.out.println(done);
 		    }
-		    else if (numPlaced == 10) {
-			p.drawWalls(i, j, g);
-			numPlaced = 0;
+		    else {
+			if (p.powerUps[i][j] == 1) {
+			    p.drawNormal(i, j, g);
+			}
+			else if (p.powerUps[i][j] == 2) {
+			    p.drawWalls(i, j, g);
+			}
 		    }
-		    maze[i][j] = 3;
 		}
 	    }
 	}
+	done++;
     }
 		   
     

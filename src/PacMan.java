@@ -55,7 +55,11 @@ public class PacMan {
 	    tileDir = 0;
 	} //updates pacman
 
-	if (m.maze[tileY][tileX] == 3 && m.p.powerUps[tileY][tileX] == 1) {
+	if (m.maze[tileY][tileX] == 0) {
+	    System.out.println("here");
+	    if (m.p.powerUps[tileY][tileX] == 1) {
+		m.p.powerUps[tileY][tileX] = 0;
+	    }
 	    numPoints++;
 	    m.maze[tileY][tileX] = 5;
 	}
