@@ -49,16 +49,6 @@ public class PacMan {
     }
 
     public boolean isCentered() {
-	/*if (((positionX - 54) % 32 == 0) && (tileDir == 2 || tileDir == 4)) {
-	    return true;
-	}
-	//else if (((503 - positionY) % 32 == 0) && (tileDir == 2 || tileDir == 4)) {
-	//    return true;
-
-	//}
-	else if(((positionY - 54) % 32 == 0) && (tildeDir == 1 || tileDir == 3) {
-		return true;
-		}*/
 	if ((positionX - 54) % 32 == 0 && (503 - positionY) % 32 == 0) {
 	    return true;
 	}
@@ -103,7 +93,6 @@ public class PacMan {
 	chomp();
 
 	if (isCentered()){
-	    System.out.println("here");
 	    tileDir = nextTileDir;
 	}
 	positionY = positionY + (velocityY * time);
