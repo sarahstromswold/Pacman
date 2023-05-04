@@ -49,8 +49,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             //world.pacman.velocityX = 0;
             world.pacman.startangle1 = 115;
             world.pacman.startangle2 = 65;
-	        world.pacman.tileDir = 1;
-
+	    world.pacman.nextTileDir = 1;
         } //move up
 	
         if (c == 'a' && world.pacman.tileX >= 1) {
@@ -58,7 +57,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             //world.pacman.velocityY = 0;
             world.pacman.startangle1 = -25;
             world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
-	    world.pacman.tileDir = 2;
+	    world.pacman.nextTileDir = 2;
         } //move left
 	
         if (c == 's' && world.pacman.tileY < 24) {
@@ -66,7 +65,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             //world.pacman.velocityX = 0;
             world.pacman.startangle1 = -65;
             world.pacman.startangle2 = -115;
-	    world.pacman.tileDir = 3;
+	    world.pacman.nextTileDir = 3;
         } //move down
 	
         if (c == 'd' && world.pacman.tileX < 24) {
@@ -74,7 +73,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             //world.pacman.velocityY = 0;
             world.pacman.startangle1 = 25;
             world.pacman.startangle2 = -25;
-	    world.pacman.tileDir = 4;
+	    world.pacman.nextTileDir = 4;
         } //move right
     }
     class Runner implements Runnable {
