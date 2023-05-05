@@ -17,18 +17,23 @@ public class Fire {
     double positionYi;
     int numTilesMoved;
 
-    public Fire(int initialPositionX, int initialPositionY, Color color) {
+    public Fire(int tileX, int tileY, Color color) {
         rand = new Random();
-        positionX = initialPositionX;
-        positionY = initialPositionY;
+        
         velocityX = 0;
         velocityY = -100;
-	    radius = 12;
-	    this.color = color;
-        positionYi = positionY;
+	radius = 12;
+	this.color = color;
+       
+        this.tileX = tileX;
+	//shifted by 4 in x
+	
+        this.tileY = tileY;
+	//shifted by 6
+	positionX = (tileX * 32) + 54;
+        positionY = (500 - ((14- tileY) * 32) + 6);
+	positionYi = positionY;
         positionXi = positionX;
-        tileX = 11;
-        tileY = 6;
         numTilesMoved = 0;
     }
 

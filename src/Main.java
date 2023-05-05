@@ -142,6 +142,8 @@ class World {
     int height;
     int width;
     Fire f; //fire guy
+    Fire f2;
+    Fire f3;
     Maze m = new Maze(50, 500); //maze
     PacMan pacman = new PacMan(m); //pacman
     HighScore highscore = new HighScore(pacman);
@@ -156,7 +158,9 @@ class World {
 	height = initHeight;
 	int fposX = 406;
 	int fposY = 250;
-	f = new Fire(fposX, fposY, new Color(157,196,168)); //fire guy
+	f = new Fire(11, 6, new Color(157,196,168));
+	f2 = new Fire(11, 7, new Color(242, 53, 141));
+	f3 = new Fire(12, 7, new Color(161, 149, 219));//fire guy
 	numLives = 1; //amount of lives
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
@@ -186,7 +190,9 @@ class World {
 	    Font font = new Font("SansSerif", Font.BOLD, 25);
 	    g.setFont(font);
 	    g.drawString("Score: " + pacman.numPoints, 410, 40);
-	    f.draw(g); //fire guy
+	    f.draw(g);
+	    f2.draw(g);
+	    f3.draw(g);//fire guy
 	    int positionX = 40;
 	    int positionY = 540;
 	    int radius = 6;
@@ -201,21 +207,23 @@ class World {
     }
 
     public void update(double time) {
-    pacman.update(time, m); //update pacman
-    f.update(time,m); //update fireguys
-    if(pacDeath()) {
-        pacman = new PacMan(m);
-        numLives--;
-        if(numLives == 0) {
-            highscore.saveHighScore("Highscore.txt");
-        }
-    } //when he dies, lives decrease
-//    for(int i = 0; i < 5; i++) {
-//        fire[i].update(this,time);
-//    } fire update
+	pacman.update(time, m); //update pacman
+	f.update(time,m);
+	f2.update(time,m);
+	f3.update(time, m);//update fireguys
+	if (pacDeath()) {
+	    pacman = new PacMan(m);
+	    numLives--;
+	    if (numLives == 0) {
+		highscore.saveHighScore("Highscore.txt");
+	    }
+	} //when he dies, lives decrease
+	//    for(int i = 0; i < 5; i++) {
+	//        fire[i].update(this,time);
+	//    } fire update
     }
     public boolean pacDeath() {
-        if(pacman.tileX == f.tileX && pacman.tileY == f.tileY) {
+        if((pacman.tileX == f.tileX && pacman.tileY == f.tileY) || (pacman.tileX == f2.tileX && pacman.tileY == f2.tileY) || (pacman.tileX == f3.tileX && pacman.tileY == f3.tileY)) {
             return true;
         }
         else {

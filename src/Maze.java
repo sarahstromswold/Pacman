@@ -86,11 +86,12 @@ public class Maze {
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 0) {
 		    if (done == 0) {
-			if (numPlaced < 10) {
+			//randomly generate
+			if (numPlaced < 20) {
 			    p.drawNormal(i, j, g);
 			    numPlaced++;
 			}
-			else if (numPlaced == 10) {
+			else if (numPlaced == 20) {
 			    p.drawWalls(i, j, g);
 			    numPlaced = 0;
 			}
