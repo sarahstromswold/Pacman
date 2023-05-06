@@ -15,16 +15,15 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public static final int FPS = 500;
     World world;
 
-
     public Main() {
 	world = new World (WIDTH, HEIGHT);
 	addKeyListener(this);
-    addMouseListener(this);
+	addMouseListener(this);
 	Thread mainThread = new Thread(new Runner());
 	mainThread.start();
 	this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
-
+    
     public static void main(String[] args) {
 	JFrame frame = new JFrame("PacMan");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,20 +80,25 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             while (true) {
                 world.update(1.0 / (double) FPS);
                 repaint();
+		if (world.m.noPoints() && world.f.tileY != 6 && world.f.tileX != 11) {
+		    System.out.println("here");
+		    world = new World(world.width, world.height, world.pacman.numPoints, world.numLives);
+		}
                 try {
                     Thread.sleep(1000 / FPS);
-                } catch (InterruptedException e) {
+                }
+		catch (InterruptedException e) {
                 }
             }
         }
     }
-
+    
     public void keyReleased(KeyEvent e) {
     }
-
+    
     public void keyTyped(KeyEvent e) {
     }
-
+    
     public void addNotify() {
         super.addNotify();
         requestFocus();
@@ -122,19 +126,19 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                 } //Quit button
             }
         }
-
+	
     } //used for the menu buttons
     public void mouseEntered(MouseEvent e) {
 
     }
     public void mouseExited(MouseEvent e) {
-
+	
     }
     public void mousePressed(MouseEvent e) {
 
     }
     public void mouseReleased(MouseEvent e) {
-
+	
     }
 }
 
@@ -160,35 +164,51 @@ class World {
 	int fposY = 250;
 	f = new Fire(11, 6, new Color(157,196,168));
 	f2 = new Fire(11, 7, new Color(242, 53, 141));
-	f3 = new Fire(12, 7, new Color(161, 149, 219));//fire guy
-	numLives = 1; //amount of lives
+	f3 = new Fire(12, 7, new Color(161, 149, 219));
+	//fire guy
+	numLives = 3; //amount of lives
 	/*fire = new Fire[5];
 	for (int i = 0; i < 5; i++) {
 	    fire[i] = new Fire(this, width/2 + i * 20, height/2);
 	    }*/
     }
 
+    public World(int initWidth, int initHeight, int numPoints, int numLives) {
+	width = initWidth;
+	height = initHeight;
+	int fposX = 406;
+	int fposY = 250;
+	f = new Fire(11, 6, new Color(157,196,168));
+	f2 = new Fire(11, 7, new Color(242, 53, 141));
+	f3 = new Fire(12, 7, new Color(161, 149, 219));
+	//fire guy
+	this.numLives = numLives;
+	pacman.numPoints = numPoints;
+    }
     public void drawWorld(Graphics g) {
 
 	if(numLives == 0) {
-        if (highscoreScreen) {
-            highscore(g);
-        }
-        else {
-            menu(g);
-        }
-    } //when out of lives, menu pops up
+	    if (highscoreScreen) {
+		highscore(g);
+	    }
+	    else {
+		menu(g);
+	    }
+	} //when out of lives, menu pops up
 
 	else {
 	    pacman.draw(g); //pacman
 	    /*for (int i = 0; i < 5; i++) {
 	      fire[i].draw(g);
 	      }*/
+	    
 	    m.colorTiles(g); //tiles
 	    g.drawRect(50, 52, 800, 480);
-	    m.drawPoints(g); //points
+	    m.drawPoints(g);
+	     //points
 	    Font font = new Font("SansSerif", Font.BOLD, 25);
 	    g.setFont(font);
+	    g.setColor(Color.WHITE);
 	    g.drawString("Score: " + pacman.numPoints, 410, 40);
 	    f.draw(g);
 	    f2.draw(g);
@@ -212,16 +232,16 @@ class World {
 	f2.update(time,m);
 	f3.update(time, m);//update fireguys
 	if (pacDeath()) {
+	    int numPoints = pacman.numPoints;
 	    pacman = new PacMan(m);
+	    pacman.numPoints = numPoints;
 	    numLives--;
 	    if (numLives == 0) {
 		highscore.saveHighScore("Highscore.txt");
 	    }
-	} //when he dies, lives decrease
-	//    for(int i = 0; i < 5; i++) {
-	//        fire[i].update(this,time);
-	//    } fire update
+	}
     }
+    
     public boolean pacDeath() {
         if((pacman.tileX == f.tileX && pacman.tileY == f.tileY) || (pacman.tileX == f2.tileX && pacman.tileY == f2.tileY) || (pacman.tileX == f3.tileX && pacman.tileY == f3.tileY)) {
             return true;
@@ -230,6 +250,7 @@ class World {
             return false;
         }
     } //resets pacman when he dies
+    
     public void menu(Graphics g) {
         Font font = new Font("SansSerif", Font.BOLD, 35);
         g.setFont(font);
@@ -242,6 +263,7 @@ class World {
         g.drawString("High Score", 354, 310);
         g.drawString("Exit", 415, 510);
     } //creates a menu
+    
     public void highscore(Graphics g) {
         Font font = new Font("SansSerif", Font.BOLD, 35);
         g.setFont(font);

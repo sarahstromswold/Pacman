@@ -81,6 +81,8 @@ public class Maze {
 
     //make this boolean, and return false to end game
     public void drawPoints(Graphics g) {
+	maze[14][0] = 5;
+	p.powerUps[14][0] = 0;
 	int numPlaced = 0;
 	for (int i = 0; i < 15; i++) {
 	    for (int j = 0; j < 25; j++) {
@@ -234,6 +236,18 @@ public class Maze {
 	    }
 	    System.out.println("");
 	}
+    }
+
+    public boolean noPoints() {
+	boolean noPoint = true;
+	for (int i = 0; i < 15; i++) {
+	    for (int j = 0; j < 25; j++) {
+		if (maze[i][j] == 0) {
+		    noPoint = false;
+		}
+	    }
+	}
+	return noPoint;
     }
 }
 
