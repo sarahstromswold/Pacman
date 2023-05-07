@@ -162,9 +162,9 @@ class World {
 	height = initHeight;
 	int fposX = 406;
 	int fposY = 250;
-	f = new Fire(11, 6, new Color(157,196,168));
-	f2 = new Fire(11, 7, new Color(242, 53, 141));
-	f3 = new Fire(12, 7, new Color(161, 149, 219));
+	f = new RandomFire(11, 6, new Color(157,196,168));
+	f2 = new RandomFire(11, 7, new Color(242, 53, 141));
+	f3 = new RandomFire(12, 7, new Color(161, 149, 219));
 	//fire guy
 	numLives = 3; //amount of lives
 	/*fire = new Fire[5];
