@@ -18,6 +18,8 @@ public class PacMan {
     int numPoints;
     int lastTileDir;
     int nextTileDir;
+    boolean wallWalk;
+    int numMoved;
     
     public PacMan(Maze m) {
         initialPositionX = 54;
@@ -37,6 +39,8 @@ public class PacMan {
 	numPoints = 0;
 	lastTileDir = 0;
 	nextTileDir = 0;
+	wallWalk = false;
+	numMoved = 0;
     } //pacman constructor
 
     public void centerPac() {
@@ -80,14 +84,21 @@ public class PacMan {
 	    numPoints++;
 	    m.maze[tileY][tileX] = 5;
 	}
-	if(tileDir == 2 || tileDir == 4) {
-		horizontal(m);
+	
+	if (m.p.powerUps[tileY][tileX] == 2) {
+	    wallWalk = true;
+	    numMoved = 0;
 	}
-	if(tileDir == 1 || tileDir == 3) {
-		vertical(m);
+
+	if (wallWalk && numMoved > 20 && m.maze[tileY][tileX] != 1) {
+	    wallWalk = false;
 	}
+
+	normalUpdate(m);
+	
 	//make 2 diff methods-one for x and y
 
+	
 	updateVel();
 
 	chomp();
@@ -100,6 +111,17 @@ public class PacMan {
 	
 	
     }
+    
+    public void normalUpdate(Maze m) {
+	if(tileDir == 2 || tileDir == 4) {
+		horizontal(m);
+	}
+	if(tileDir == 1 || tileDir == 3) {
+		vertical(m);
+	}
+    }
+
+	
     public void horizontal(Maze m) {
 	if (tileDir == 2) {
 	    if (tileX == 0) {
@@ -107,14 +129,24 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileX > 0) {
-		if (m.maze[tileY][tileX - 1] == 1 || m.maze[tileY][tileX - 1] == 2) {
+		if ((m.maze[tileY][tileX - 1] == 1 || m.maze[tileY][tileX - 1] == 2) && !wallWalk) {
+		    System.out.println("here");
 		    lastTileDir = 2;
 		    tileDir = 0;
 		}
+		else if (wallWalk && tileX == 15 && tileY > 4 && tileY < 10) {
+		    lastTileDir = 2;
+		    tileDir = 0;
+		}
+		/*else if (wallWalk && tileX == 15) {
+		    lastTileDir = 2;
+		    tileDir = 0;
+		    }*/
 	    }
 	    if (tileX > 0 && tileDir == 2 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
 		tileX--;
+		numMoved++;
 		centerPac();
 	    }
 	}//left
@@ -124,14 +156,23 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileX < 24) {
-		if (m.maze[tileY][tileX + 1] == 1 || m.maze[tileY][tileX + 1] == 2) {
+		if ((m.maze[tileY][tileX + 1] == 1 || m.maze[tileY][tileX + 1] == 2) && !wallWalk) {
 		    lastTileDir = 4;
 		    tileDir = 0;
 		}
+		else if (wallWalk && tileX == 9 && tileY > 4 && tileY < 10) {
+		    lastTileDir = 4;
+		    tileDir = 0;
+		}
+		/*else if (wallWalk && tileX == 9) {
+		    lastTileDir = 4;
+		    tileDir = 0;
+		    }*/
 	    }
 	    if (tileX < 24 && tileDir == 4 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
 		tileX++;
+		numMoved++;
 		centerPac();
 	    }
 	}//right
@@ -144,7 +185,11 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileY > 0) {
-		if (m.maze[tileY - 1][tileX] == 1 || m.maze[tileY - 1][tileX] == 2) {
+		if ((m.maze[tileY - 1][tileX] == 1 || m.maze[tileY - 1][tileX] == 2) && !wallWalk) {
+		    lastTileDir = 1;
+		    tileDir = 0;
+		}
+		else if (wallWalk && tileY == 10 && tileX > 9 && tileX < 15) {
 		    lastTileDir = 1;
 		    tileDir = 0;
 		}
@@ -152,6 +197,7 @@ public class PacMan {
 	    if (tileY > 0 && tileDir == 1 && Math.abs(posYi - positionY) > 32) {
 		posYi = positionY;
 		tileY--;
+		numMoved++;
 		centerPac();
 	    }
 	} //up
@@ -161,14 +207,19 @@ public class PacMan {
 		tileDir = 0;
 	    }
 	    if (tileY < 14) {
-		if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
+		if ((m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) && !wallWalk) {
 		    lastTileDir = 3;
 		    tileDir = 0;
 		}
-			}
+		else if (wallWalk && tileY == 4 && tileX > 9 && tileX < 15) {
+		    lastTileDir = 3;
+		    tileDir = 0;
+		}
+	    }
 	    if (tileY < 14 && tileDir == 3 && Math.abs(posYi - positionY) > 32) {
 		posYi = positionY;
 		tileY++;
+		numMoved++;
 		centerPac();
 	    }
 		} //down
