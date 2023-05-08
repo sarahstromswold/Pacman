@@ -22,6 +22,7 @@ public class Maze {
 	y = initY;
     }
 
+    
     public void randomizeMaze() {
 	Random rand = new Random();
 	for (int i = 0; i < 3; i++) {

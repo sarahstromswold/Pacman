@@ -236,6 +236,7 @@ class World {
 	    pacman = new PacMan(m);
 	    pacman.numPoints = numPoints;
 	    numLives--;
+	    pacman.wallWalk = false;
 	    if (numLives == 0) {
 		highscore.saveHighScore("Highscore.txt");
 	    }

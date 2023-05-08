@@ -134,6 +134,7 @@ public class PacMan {
 
 	
     public void horizontal(Maze m) {
+	//try catch with method
 	if (tileDir == 2) {
 	    if (tileX == 0) {
 		lastTileDir = 2;
