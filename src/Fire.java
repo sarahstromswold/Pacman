@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Random;
 import java.util.*;
 
 public class Fire {
@@ -8,16 +7,19 @@ public class Fire {
     int velocityX;
     int velocityY;
     int radius;
-    int roll;
     int tileX;
     int tileY;
-    Random rand;
     Color color;
     double positionXi;
     double positionYi;
     int numTilesMoved;
+    int initialPosX;
+    int initialPosY;
+    int roll;
+    Random rand = new Random();
 
     public Fire(int tileX, int tileY, Color color) {
+       
         rand = new Random();
         
         velocityX = 0;
@@ -35,15 +37,13 @@ public class Fire {
 	positionYi = positionY;
         positionXi = positionX;
         numTilesMoved = 0;
+	initialPosX = tileX;
+	initialPosY = tileY;
     }
 
     public void update(double time, Maze m) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
-        if (numTilesMoved == 5) {
-            direction(m);
-            numTilesMoved = 0;
-        }
         if (velocityY < 0) {
             if (tileY == 0) {
                 direction(m);
@@ -146,6 +146,15 @@ public class Fire {
         else {
             direction(m);
         }
+    }
+
+    public void resetPos() {
+	tileX = initialPosX;
+	tileY = initialPosY;
+	positionX = (tileX * 32) + 54;
+        positionY = (500 - ((14- tileY) * 32) + 6);
+	positionYi = positionY;
+        positionXi = positionX;
     }
 
 }

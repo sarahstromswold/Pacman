@@ -25,6 +25,12 @@ public class Powerups {
 	g.fillRoundRect(((j * 32) + 50 + 11), (500 - ((14 - i) * 32) + 11), 10, 10, 2, 2);
 	powerUps[i][j] = 2;
     }
+
+    public void drawKill(int i, int j, Graphics g) {
+	g.setColor(new Color(250, 225, 239));
+	g.fillRoundRect(((j * 32) + 50 + 11), (500 - ((14 - i) * 32) + 11), 10, 10, 2, 2);
+	powerUps[i][j] = 3;
+    }
     
     public void prints() {
 	for (int i = 0; i < 15; i++) {

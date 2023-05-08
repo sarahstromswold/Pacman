@@ -81,6 +81,8 @@ public class Maze {
 
     //make this boolean, and return false to end game
     public void drawPoints(Graphics g) {
+	// Random rand = new Random();
+	// int r = rand.nextInt(20, 31);
 	maze[14][0] = 5;
 	p.powerUps[14][0] = 0;
 	int numPlaced = 0;
@@ -88,13 +90,20 @@ public class Maze {
 	    for (int j = 0; j < 25; j++) {
 		if (maze[i][j] == 0) {
 		    if (done == 0) {
+			
 			//randomly generate
-			if (numPlaced < 20) {
+			if (numPlaced != 20 && numPlaced != 40) {
 			    p.drawNormal(i, j, g);
 			    numPlaced++;
 			}
 			else if (numPlaced == 20) {
+			    p.drawKill(i, j, g);
+			    //r = rand.nextInt(20, 31);
+			    numPlaced++;
+			}
+			else if (numPlaced == 40) {
 			    p.drawWalls(i, j, g);
+			    // r = rand.nextInt(20, 31);
 			    numPlaced = 0;
 			}
 			maze[i][j] = 3;
@@ -105,6 +114,9 @@ public class Maze {
 			}
 			else if (p.powerUps[i][j] == 2) {
 			    p.drawWalls(i, j, g);
+			}
+			else if (p.powerUps[i][j] == 3){
+			    p.drawKill(i, j, g);
 			}
 		    }
 		}

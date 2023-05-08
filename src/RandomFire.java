@@ -4,13 +4,8 @@ import java.util.Random;
 
 public class RandomFire extends Fire{
 
-    int roll;
-    Random rand;
-
     public RandomFire(int tileX, int tileY, Color color) {
 	super(tileX, tileY, color);
-	
-        rand = new Random();
     }
 
     public void update(double time, Maze m) {

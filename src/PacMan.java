@@ -20,6 +20,7 @@ public class PacMan {
     int nextTileDir;
     boolean wallWalk;
     int numMoved;
+    boolean eatFire;
     
     public PacMan(Maze m) {
         initialPositionX = 54;
@@ -41,6 +42,7 @@ public class PacMan {
 	nextTileDir = 0;
 	wallWalk = false;
 	numMoved = 0;
+	eatFire = false;
     } //pacman constructor
 
     public void centerPac() {
@@ -90,10 +92,19 @@ public class PacMan {
 	    numMoved = 0;
 	}
 
-	if (wallWalk && numMoved > 20 && m.maze[tileY][tileX] != 1) {
+	if (wallWalk && numMoved > 15 && m.maze[tileY][tileX] != 1) {
 	    wallWalk = false;
 	}
 
+	if (m.p.powerUps[tileY][tileX] == 3) {
+	    eatFire = true;
+	    numMoved = 0;
+	}
+
+	if (eatFire && numMoved > 15) {
+	    eatFire = false;
+	}
+	
 	normalUpdate(m);
 	
 	//make 2 diff methods-one for x and y
@@ -292,6 +303,10 @@ public class PacMan {
         g.setColor(Color.YELLOW);
         g.fillArc((int)positionX,(int)positionY,radius * 2, radius * 2,startangle1,180);
         g.fillArc((int)positionX,(int)positionY, radius * 2, radius * 2, startangle2,-180);
+	g.setColor(new Color(250, 225, 239));
+	if (eatFire) {
+	    g.fillRect(0, 0, 10, 10);
+	}
     } //draws pacman
 
     

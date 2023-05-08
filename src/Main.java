@@ -231,13 +231,25 @@ class World {
 	f.update(time,m);
 	f2.update(time,m);
 	f3.update(time, m);//update fireguys
-	if (pacDeath()) {
+	if (pacDeath() && !pacman.eatFire) {
 	    int numPoints = pacman.numPoints;
 	    pacman = new PacMan(m);
 	    pacman.numPoints = numPoints;
 	    numLives--;
 	    if (numLives == 0) {
 		highscore.saveHighScore("Highscore.txt");
+	    }
+	}
+	//make into array and reset position with for each
+	else if (pacDeath() && pacman.eatFire) {
+	    if(pacman.tileX == f.tileX && pacman.tileY == f.tileY) {
+		f.resetPos();
+	    }
+	    else if (pacman.tileX == f2.tileX && pacman.tileY == f2.tileY){
+		f2.resetPos();
+	    }
+	    else if (pacman.tileX == f3.tileX && pacman.tileY == f3.tileY){
+		f3.resetPos();
 	    }
 	}
     }
