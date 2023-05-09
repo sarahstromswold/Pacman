@@ -11,6 +11,7 @@ public class Tile{
 	}
     }
 
+    //creates all the tiles (helper constuctor method) and holds them in a 3D array to call whwich one you need based on input from constructor
     public int[][][] createTiles() {
 	int[][][] holder = new int[5][5][5];
 	holder[0] = typeOne();
@@ -147,7 +148,8 @@ public class Tile{
 	}
 	return s;
     }
-    
+
+    //rotates the array based on the number inputted in the constructor
     public int[][] rotate() {
 	int[][] temp = new int[5][5];
 	for (int i = 0; i < 5; i++) {

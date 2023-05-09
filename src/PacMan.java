@@ -79,23 +79,27 @@ public class PacMan {
 	    tileDir = 0;
 	} //updates pacman
 
+	//if the value in maze is zero, increase numPoints, change to not zero,and changes value of normal points in powerups
 	if (m.maze[tileY][tileX] == 0) {
 	    if (m.p.powerUps[tileY][tileX] == 1) {
 		m.p.powerUps[tileY][tileX] = 0;
 	    }
 	    numPoints++;
 	    m.maze[tileY][tileX] = 5;
-	}
-	
+	} 
+
+	//if powerups is equal to two (square is blue), allow him to walk through walls
 	if (m.p.powerUps[tileY][tileX] == 2) {
 	    wallWalk = true;
 	    numMoved = 0;
-	}
+	} 
 
+	//if wall walk is true and he has gone 15 squares and is currently not in a square set wall walk to false
 	if (wallWalk && numMoved > 15 && m.maze[tileY][tileX] != 1) {
 	    wallWalk = false;
 	}
 
+	//if square is pink, can eat fire
 	if (m.p.powerUps[tileY][tileX] == 3) {
 	    eatFire = true;
 	    numMoved = 0;
@@ -106,14 +110,13 @@ public class PacMan {
 	}
 	
 	normalUpdate(m);
-	
-	//make 2 diff methods-one for x and y
-
-	
+        
+	//update velocity based on value of tileDir
 	updateVel();
 
 	chomp();
 
+	//change the tileDir to next tileDir if pacman is currently centered in the tile
 	if (isCentered()){
 	    tileDir = nextTileDir;
 	}
@@ -150,10 +153,6 @@ public class PacMan {
 		    lastTileDir = 2;
 		    tileDir = 0;
 		}
-		/*else if (wallWalk && tileX == 15) {
-		    lastTileDir = 2;
-		    tileDir = 0;
-		    }*/
 	    }
 	    if (tileX > 0 && tileDir == 2 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
@@ -176,10 +175,6 @@ public class PacMan {
 		    lastTileDir = 4;
 		    tileDir = 0;
 		}
-		/*else if (wallWalk && tileX == 9) {
-		    lastTileDir = 4;
-		    tileDir = 0;
-		    }*/
 	    }
 	    if (tileX < 24 && tileDir == 4 && Math.abs(posXi - positionX) > 32) {
 		posXi = positionX;
@@ -234,7 +229,7 @@ public class PacMan {
 		numMoved++;
 		centerPac();
 	    }
-		} //down
+	} //down
     }
     
     public void chomp() {
@@ -305,6 +300,7 @@ public class PacMan {
         g.fillArc((int)positionX,(int)positionY,radius * 2, radius * 2,startangle1,180);
         g.fillArc((int)positionX,(int)positionY, radius * 2, radius * 2, startangle2,-180);
 	g.setColor(new Color(250, 225, 239));
+	
 	if (eatFire) {
 	    g.fillRect(0, 0, 10, 10);
 	}

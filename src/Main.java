@@ -84,6 +84,8 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 		    System.out.println("here");
 		    world = new World(world.width, world.height, world.pacman.numPoints, world.numLives);
 		}
+		//if there are no points left in the map (and it's not the beginning of the game), create
+		//a new instance of world, and pass in the current values of lives and points
                 try {
                     Thread.sleep(1000 / FPS);
                 }
