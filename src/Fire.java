@@ -20,8 +20,21 @@ public class Fire {
     int roll;
     Random rand = new Random();
 
-    public Fire(int tileX, int tileY, Color color) {
-       
+    public Fire(int tileX, int tileY, int i) {
+	
+	if (i == 0) {
+	    color = new Color(157,196,168);
+	}
+	else if (i == 1) {
+	    color = new Color(242, 53, 141);
+	}
+	else if ( i == 2) {
+	    color = new Color(161, 149, 219);
+	}
+	else if (i == 3) {
+	    color = new Color(245, 194, 66);
+	}
+	
         rand = new Random();
         
         velocityX = 0;

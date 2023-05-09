@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class RandomFire extends Fire{
 
-    public RandomFire(int tileX, int tileY, Color color) {
+    public RandomFire(int tileX, int tileY, int color) {
 	super(tileX, tileY, color);
     }
 

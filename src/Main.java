@@ -80,7 +80,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             while (true) {
                 world.update(1.0 / (double) FPS);
                 repaint();
-		if (world.m.noPoints() && world.f.tileY != 6 && world.f.tileX != 11) {
+		if (world.m.noPoints() && world.f[0].tileY != 6 && world.f[0].tileX != 11) {
 		    world = new World(world.width, world.height, world.pacman.numPoints, world.numLives);
 		}
 		//if there are no points left in the map (and it's not the beginning of the game), create
@@ -146,10 +146,12 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 class World {
     int height;
     int width;
-    Fire f; //fire guy
-    Fire f2;
-    Fire f3;
-    //Fire f4;
+    Fire[] f = new Fire[4];
+    Color c;
+    Color c2;
+    Color c3;
+    Color c4;
+  
     Maze m = new Maze(50, 500); //maze
     PacMan pacman = new PacMan(); //pacman
     HighScore highscore = new HighScore(pacman);
@@ -161,12 +163,11 @@ class World {
     public World(int initWidth, int initHeight) {
 	width = initWidth;
 	height = initHeight;
-	int fposX = 406;
-	int fposY = 250;
-	f = new RandomFire(11, 6, new Color(157,196,168));
-	f2 = new RandomFire(11, 7, new Color(242, 53, 141));
-	f3 = new RandomFire(12, 7, new Color(161, 149, 219));
-	//f4 = new SmartFire(12, 6, Color.WHITE, pacman);
+
+	for (int i = 0; i < 4; i++) {
+	    f[i] = new RandomFire((int)(11) + i / 2, (int)(6) + i / 2, i);
+	}
+
 	//fire guy
 	numLives = 3; //amount of lives
 	/*fire = new Fire[5];
@@ -178,11 +179,9 @@ class World {
     public World(int initWidth, int initHeight, int numPoints, int numLives) {
 	width = initWidth;
 	height = initHeight;
-	int fposX = 406;
-	int fposY = 250;
-	f = new Fire(11, 6, new Color(157,196,168));
-	f2 = new Fire(11, 7, new Color(242, 53, 141));
-	f3 = new Fire(12, 7, new Color(161, 149, 219));
+	for (int i = 0; i < 4; i++) {
+	    f[i] = new RandomFire((int)(11) + i / 2, (int)(6) + i / 2, i);
+	}
 	//fire guys
 	this.numLives = numLives;
 	pacman.numPoints = numPoints;
@@ -212,10 +211,11 @@ class World {
 	    g.setFont(font);
 	    g.setColor(Color.WHITE);
 	    g.drawString("Score: " + pacman.numPoints, 410, 40);
-	    f.draw(g);
-	    f2.draw(g);
-	    f3.draw(g);
-	    //f4.draw(g);//fire guy
+
+	    for (int i = 0; i < 4; i ++) {
+		f[i].draw(g);
+	    }
+	
 	    int positionX = 40;
 	    int positionY = 540;
 	    int radius = 6;
@@ -230,10 +230,10 @@ class World {
 
     public void update(double time) {
 	pacman.update(time, m); //update pacman
-	f.update(time,this);
-	f2.update(time,this);
-	f3.update(time, this);
-	//f4.update(time, m);//update fireguys
+	for (int i = 0; i < 4; i++) {
+	    f[i].update(time, this);
+	}
+
 	if (pacDeath() && !pacman.eatFire) {
 	    int numPoints = pacman.numPoints;
 	    pacman = new PacMan();
@@ -246,26 +246,22 @@ class World {
 	}
 	//make into array and reset position with for each
 	else if (pacDeath() && pacman.eatFire) {
-        pacman.numPoints += 10;
-	    if(pacman.tileX == f.tileX && pacman.tileY == f.tileY) {
-		f.resetPos();
-	    }
-	    else if (pacman.tileX == f2.tileX && pacman.tileY == f2.tileY){
-		f2.resetPos();
-	    }
-	    else if (pacman.tileX == f3.tileX && pacman.tileY == f3.tileY){
-		f3.resetPos();
+	    pacman.numPoints += 10;
+	    for (int i = 0; i < 4; i++) {
+		if (pacman.tileX == f[i].tileX && pacman.tileY == f[i].tileY) {
+		    f[i].resetPos();
+		}
 	    }
 	}
     }
     
     public boolean pacDeath() {
-        if((pacman.tileX == f.tileX && pacman.tileY == f.tileY) || (pacman.tileX == f2.tileX && pacman.tileY == f2.tileY) || (pacman.tileX == f3.tileX && pacman.tileY == f3.tileY)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+	for (int i = 0; i < 4; i++) {
+	    if (pacman.tileX == f[i].tileX && pacman.tileY == f[i].tileY) {
+		return true;
+	    }
+	}
+	return false;
     } //resets pacman when he dies
     
     public void menu(Graphics g) {

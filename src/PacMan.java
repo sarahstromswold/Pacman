@@ -90,7 +90,7 @@ public class PacMan {
 
 	//if powerups is equal to two (square is blue), allow him to walk through walls
 	if (m.p.powerUps[tileY][tileX] == 2) {
-		m.p.powerUps[tileY][tileX] = 0;
+	    m.p.powerUps[tileY][tileX] = 0;
 	    wallWalk = true;
 	    numMoved = 0;
 	} 
@@ -102,7 +102,7 @@ public class PacMan {
 
 	//if square is pink, can eat fire
 	if (m.p.powerUps[tileY][tileX] == 3) {
-		m.p.powerUps[tileY][tileX] = 0;
+	    m.p.powerUps[tileY][tileX] = 0;
 	    eatFire = true;
 	    numMoved = 0;
 	}
@@ -301,10 +301,6 @@ public class PacMan {
         g.fillArc((int)positionX,(int)positionY,radius * 2, radius * 2,startangle1,180);
         g.fillArc((int)positionX,(int)positionY, radius * 2, radius * 2, startangle2,-180);
 	g.setColor(new Color(250, 225, 239));
-	
-	if (eatFire) {
-	    g.fillRect(0, 0, 10, 10);
-	}
     } //draws pacman
 
     
