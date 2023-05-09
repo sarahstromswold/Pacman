@@ -2,39 +2,39 @@ import java.util.ArrayList;
 import java.util.*;
 import java.awt.*;
 import java.util.Random;
-import java.util.TreeSet;
 import java.util.LinkedList;
 
 public class SmartFire extends Fire {
-
-    public SmartFire(int tileX, int tileY, Color color) {
+    PacMan pacman;
+    public SmartFire(int tileX, int tileY, Color color, PacMan p) {
 	super(tileX, tileY, color);
+	pacman = p;
     }
     
     @Override
-    
     public void direction(Maze m) {
 	HuntPacman h = new HuntPacman();
-	search(new MyQueue(), h);
+	Node n = search(new MyQueue(), h, tileX, tileY, m);
+	velocityX = n.velX;
+	velocityY = n.velY;
     }
 
-    public static Node search(MyQueue pile, HuntPacman p) {
-        TreeSet<State> considered = new TreeSet<State>();
-	State initialState = p.getStartState();
-	Node initialNode = new Node(null, initialState);
-	if (p.isGoal(initialState)){return initialNode;}
+    public Node search(MyQueue pile, HuntPacman p, int tileX, int tileY, Maze m) {
+        ArrayList<State> considered = new ArrayList<State>();
+	State initialState = p.getStartState(tileX, tileY);
+	Node initialNode = new Node(null, initialState, tileX, tileY);
+	if (p.isGoal(initialState, pacman)){return initialNode;}
 	pile.push(initialNode);
 	considered.add(initialState);
 	while (! pile.isEmpty()){
 	    Node popped = pile.pop();
-	    System.out.println(popped.s);
-	    ArrayList<directionState> succs = popped.s.getSuccessors();
-	    for (State s : succs){
-		if (p.isGoal(s)){return new Node(popped, s);}
+	    ArrayList<directionState> succs = popped.s.getSuccessors(m);
+	    for (directionState s : succs){
+		if (p.isGoal(s.s, pacman)){return new Node(popped, s.s, s.velX, s.velY);}
 		else{
-		    if (! considered.contains(s)){
-			    pile.push(new Node(popped, s));
-			    considered.add(s);
+		    if (! considered.contains(s.s)){
+			pile.push(new Node(popped, s.s, s.velX, s.velY));
+			considered.add(s.s);
 		    }
 		}
 	    }
@@ -67,28 +67,33 @@ class State {
     }
     
     public ArrayList<directionState> getSuccessors(Maze m) {
-	ArrayList<State> succs = new ArrayList<State>();
+	ArrayList<directionState> succs = new ArrayList<directionState>();
 	if (fireY < 14) {
-	    if (m[fireY + 1][fireX] == 0) {
+	    if (m.maze[fireY + 1][fireX] == 0) {
 		succs.add(new directionState(new State(fireX, fireY + 1), 0, 100));
 	    }
 	}
 	if (fireY > 0) {
-	    if (m[fireY - 1][fireX] == 0) {
+	    if (m.maze[fireY - 1][fireX] == 0) {
 		succs.add(new directionState(new State(fireX, fireY - 1), 0, -100));
 	    }
 	}
 	if (fireX < 25) {
-	    if (m[fireY][fireX + 1] == 0) {
+	    if (m.maze[fireY][fireX + 1] == 0) {
 		succs.add(new directionState(new State(fireX + 1, fireY), 100, 0));
 	    }
 	}
 	if (fireX > 0) {
-	    if (m[fireY][fireX - 1] == 0) {
+	    if (m.maze[fireY][fireX - 1] == 0) {
 		succs.add(new directionState(new State(fireX - 1, fireY), -100, 0));
 	    }
 	}
+	return succs;
     }
+
+    /*public int compareTo (State other) {
+      if (this.fireY > other.fireY) {*/
+	    
 }
 
     
