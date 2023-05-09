@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="pls help me comment :(">
+    <list default="true" id="eb3f83f9-c47c-4479-b24d-8310081356e0" name="Changes" comment="little things fixed!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HighScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HighScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacMan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RandomFire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RandomFire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SmartFire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SmartFire.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683655982047</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="little things fixed!">
+      <created>1683662094798</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1683662094798</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -193,6 +194,7 @@
     <MESSAGE value="sorta highscore" />
     <MESSAGE value="highscore works" />
     <MESSAGE value="pls help me comment :(" />
-    <option name="LAST_COMMIT_MESSAGE" value="pls help me comment :(" />
+    <MESSAGE value="little things fixed!" />
+    <option name="LAST_COMMIT_MESSAGE" value="little things fixed!" />
   </component>
 </project>

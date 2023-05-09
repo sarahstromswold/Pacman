@@ -147,10 +147,6 @@ class World {
     int height;
     int width;
     Fire[] f = new Fire[4];
-    Color c;
-    Color c2;
-    Color c3;
-    Color c4;
   
     Maze m = new Maze(50, 500); //maze
     PacMan pacman = new PacMan(); //pacman
