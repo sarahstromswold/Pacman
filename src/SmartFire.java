@@ -21,25 +21,29 @@ public class SmartFire extends Fire {
 
     public Node search(MyQueue pile, HuntPacman p, int tileX, int tileY, Maze m) {
         ArrayList<State> considered = new ArrayList<State>();
-	State initialState = p.getStartState(tileX, tileY);
-	Node initialNode = new Node(null, initialState, tileX, tileY);
-	if (p.isGoal(initialState, pacman)){return initialNode;}
-	pile.push(initialNode);
-	considered.add(initialState);
-	while (! pile.isEmpty()){
-	    Node popped = pile.pop();
-	    ArrayList<directionState> succs = popped.s.getSuccessors(m);
-	    for (directionState s : succs){
-		if (p.isGoal(s.s, pacman)){return new Node(popped, s.s, s.velX, s.velY);}
-		else{
-		    if (! considered.contains(s.s)){
-			pile.push(new Node(popped, s.s, s.velX, s.velY));
-			considered.add(s.s);
-		    }
+		State initialState = p.getStartState(tileX, tileY);
+		Node initialNode = new Node(null, initialState, tileX, tileY);
+		if (p.isGoal(initialState, pacman)){
+			return initialNode;
 		}
-	    }
-	}
-	return null;//no solution
+		pile.push(initialNode);
+		considered.add(initialState);
+		while (! pile.isEmpty()){
+			Node popped = pile.pop();
+			ArrayList<directionState> succs = popped.s.getSuccessors(m);
+			for (directionState s : succs){
+				if (p.isGoal(s.s, pacman)){
+					return new Node(popped, s.s, s.velX, s.velY);
+				}
+				else{
+					if (! considered.contains(s.s)){
+					pile.push(new Node(popped, s.s, s.velX, s.velY));
+					considered.add(s.s);
+					}
+				}
+			}
+		}
+		return null;//no solution
     }
 }
 

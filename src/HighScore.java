@@ -34,7 +34,6 @@ public class HighScore {
             Scanner s = new Scanner(new File(fileName));
             while(s.hasNextInt()) {
                 highscore = s.nextInt();
-                System.out.println(highscore);
                 s.nextLine();
             } //loads high score
             s.close();
@@ -43,7 +42,6 @@ public class HighScore {
             System.out.println("Badness in loadPointFromFile");
             System.err.println(e);
         }
-        //System.out.println("will return:" + highscore);
         return highscore; //returns highscore in terminal
         }
 }

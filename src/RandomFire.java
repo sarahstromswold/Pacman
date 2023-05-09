@@ -8,10 +8,10 @@ public class RandomFire extends Fire{
 	super(tileX, tileY, color);
     }
 
-    public void update(double time, Maze m) {
-	super.update(time, m);
+    public void update(double time, World w) {
+	super.update(time, w);
         if (numTilesMoved == 5) {
-            direction(m);
+            direction(w.m);
             numTilesMoved = 0;
         }
     }

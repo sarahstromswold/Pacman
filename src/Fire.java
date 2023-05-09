@@ -9,6 +9,8 @@ public class Fire {
     int radius;
     int tileX;
     int tileY;
+
+    Color intialcolor;
     Color color;
     double positionXi;
     double positionYi;
@@ -25,7 +27,7 @@ public class Fire {
         velocityX = 0;
         velocityY = -100;
 	radius = 12;
-	this.color = color;
+	this.intialcolor = color;
        
         this.tileX = tileX;
 	//shifted by 4 in x
@@ -41,16 +43,22 @@ public class Fire {
 	initialPosY = tileY;
     }
 
-    public void update(double time, Maze m) {
+    public void update(double time, World w) {
         positionX = positionX + (velocityX * time);
         positionY = positionY + (velocityY * time);
+        if (w.pacman.eatFire) {
+            color = new Color(rand.nextInt(0,255),rand.nextInt(0,255),rand.nextInt(0,255));
+        }
+        else {
+            color = intialcolor;
+        }
         if (velocityY < 0) {
             if (tileY == 0) {
-                direction(m);
+                direction(w.m);
             }
             else if (tileY > 0) {
-                if (m.maze[tileY - 1][tileX] == 1) {
-                    direction(m);
+                if (w.m.maze[tileY - 1][tileX] == 1) {
+                    direction(w.m);
                 }
             }
             if (tileY > 0 && Math.abs(positionYi - positionY) > 32) {
@@ -62,11 +70,11 @@ public class Fire {
 
         else if (velocityX < 0) {
             if (tileX == 0) {
-                direction(m);
+                direction(w.m);
             }
             else if (tileX > 0) {
-                if (m.maze[tileY][tileX - 1] == 1) {
-                    direction(m);
+                if (w.m.maze[tileY][tileX - 1] == 1) {
+                    direction(w.m);
                 }
             }
             if (tileX > 0 && Math.abs(positionXi - positionX) > 32) {
@@ -78,11 +86,11 @@ public class Fire {
 
         else if (velocityY > 0) {
             if (tileY == 14) {
-                direction(m);
+                direction(w.m);
             }
             else if (tileY < 14) {
-                if (m.maze[tileY + 1][tileX] == 1 || m.maze[tileY + 1][tileX] == 2) {
-                    direction(m);
+                if (w.m.maze[tileY + 1][tileX] == 1 || w.m.maze[tileY + 1][tileX] == 2) {
+                    direction(w.m);
                 }
             }
             if (tileY < 14 && Math.abs(positionYi - positionY) > 32) {
@@ -94,11 +102,11 @@ public class Fire {
 
         else if (velocityX > 0) {
             if (tileX == 24) {
-                direction(m);
+                direction(w.m);
             }
             else if (tileX < 24) {
-                if (m.maze[tileY][tileX + 1] == 1){
-                    direction(m);
+                if (w.m.maze[tileY][tileX + 1] == 1){
+                    direction(w.m);
                 }
             }
             if (tileX < 24 && Math.abs(positionXi - positionX) > 32) {

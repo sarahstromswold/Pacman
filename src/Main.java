@@ -81,7 +81,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                 world.update(1.0 / (double) FPS);
                 repaint();
 		if (world.m.noPoints() && world.f.tileY != 6 && world.f.tileX != 11) {
-		    System.out.println("here");
 		    world = new World(world.width, world.height, world.pacman.numPoints, world.numLives);
 		}
 		//if there are no points left in the map (and it's not the beginning of the game), create
@@ -231,9 +230,9 @@ class World {
 
     public void update(double time) {
 	pacman.update(time, m); //update pacman
-	f.update(time,m);
-	f2.update(time,m);
-	f3.update(time, m);
+	f.update(time,this);
+	f2.update(time,this);
+	f3.update(time, this);
 	//f4.update(time, m);//update fireguys
 	if (pacDeath() && !pacman.eatFire) {
 	    int numPoints = pacman.numPoints;
@@ -247,6 +246,7 @@ class World {
 	}
 	//make into array and reset position with for each
 	else if (pacDeath() && pacman.eatFire) {
+        pacman.numPoints += 10;
 	    if(pacman.tileX == f.tileX && pacman.tileY == f.tileY) {
 		f.resetPos();
 	    }
