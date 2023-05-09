@@ -130,19 +130,19 @@ public class Fire {
         if (roll == 1 && velocityX != -100) {
             velocityX = -100;
             velocityY = 0;
-        }
+        } //randomly move left
         else if (roll == 2 && velocityY != -100) {
             velocityY = -100;
             velocityX = 0;
-        }
+        }//randomly move up
         else if (roll == 3 && velocityX != 100) {
             velocityX = 100;
             velocityY = 0;
-        }
+        }//randomly move right
         else if (roll == 4 && velocityY != 100) {
             velocityX = 0;
             velocityY = 100;
-        }
+        }//randomly move down
         else {
             direction(m);
         }
@@ -155,7 +155,7 @@ public class Fire {
         positionY = (500 - ((14- tileY) * 32) + 6);
 	positionYi = positionY;
         positionXi = positionX;
-    }
+    }  //when pacman eats the ghosts, they get set back to the box
 
 }
 

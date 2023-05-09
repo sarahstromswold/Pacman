@@ -49,7 +49,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = 115;
             world.pacman.startangle2 = 65;
 	    world.pacman.nextTileDir = 1;
-        } //move up
+        } //move pacman up
 	
         if (c == 'a' && world.pacman.tileX >= 1) {
             //world.pacman.velocityX = -100;
@@ -57,7 +57,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = -25;
             world.pacman.startangle2 = 25; //larger start angle = smaller mouth opening
 	    world.pacman.nextTileDir = 2;
-        } //move left
+        } //move pacman left
 	
         if (c == 's' && world.pacman.tileY < 24) {
             //world.pacman.velocityY = 100;
@@ -65,7 +65,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = -65;
             world.pacman.startangle2 = -115;
 	    world.pacman.nextTileDir = 3;
-        } //move down
+        } //move pacman down
 	
         if (c == 'd' && world.pacman.tileX < 24) {
             //world.pacman.velocityX = 100;
@@ -73,7 +73,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             world.pacman.startangle1 = 25;
             world.pacman.startangle2 = -25;
 	    world.pacman.nextTileDir = 4;
-        } //move right
+        } //move pacman right
     }
     class Runner implements Runnable {
         public void run() {
@@ -150,13 +150,12 @@ class World {
     Fire f3;
     //Fire f4;
     Maze m = new Maze(50, 500); //maze
-    PacMan pacman = new PacMan(m); //pacman
+    PacMan pacman = new PacMan(); //pacman
     HighScore highscore = new HighScore(pacman);
-    int numLives; //lives
+    int numLives; //pacman lives
     boolean highscoreScreen = false;
     int currHighScore;
 
-    //Powerups power;
 
     public World(int initWidth, int initHeight) {
 	width = initWidth;
@@ -183,7 +182,7 @@ class World {
 	f = new Fire(11, 6, new Color(157,196,168));
 	f2 = new Fire(11, 7, new Color(242, 53, 141));
 	f3 = new Fire(12, 7, new Color(161, 149, 219));
-	//fire guy
+	//fire guys
 	this.numLives = numLives;
 	pacman.numPoints = numPoints;
     }
@@ -224,9 +223,8 @@ class World {
 		g.fillArc((int)positionX + i * 15,(int)positionY,radius * 2, radius * 2,25,180);
 		g.fillArc((int)positionX + i * 15,(int)positionY, radius * 2, radius * 2, -25,-180);
 	    } //life counter
-	}
-	        
-	//draw powerups
+	} ///runs game while pacman still has lives
+
     }
 
     public void update(double time) {
@@ -237,13 +235,13 @@ class World {
 	//f4.update(time, m);//update fireguys
 	if (pacDeath() && !pacman.eatFire) {
 	    int numPoints = pacman.numPoints;
-	    pacman = new PacMan(m);
+	    pacman = new PacMan();
 	    pacman.numPoints = numPoints;
-	    numLives--;
+	    numLives--; //decrement pacmans lives when he gets eaten by ghosts
 	    pacman.wallWalk = false;
 	    if (numLives == 0) {
 		highscore.saveHighScore("Highscore.txt");
-	    }
+	    } //save score when pacman dies
 	}
 	//make into array and reset position with for each
 	else if (pacDeath() && pacman.eatFire) {
@@ -279,7 +277,7 @@ class World {
         g.drawString("Play Again", 357, 110);
         g.drawString("High Score", 354, 310);
         g.drawString("Exit", 415, 510);
-    } //creates a menu
+    } //creates a main menu
     
     public void highscore(Graphics g) {
         Font font = new Font("SansSerif", Font.BOLD, 35);
@@ -289,6 +287,6 @@ class World {
         g.setColor(Color.WHITE);
         g.drawString("EXIT", 710, 505);
         g.drawString("Highscore: " + currHighScore, 300,50);
-    }
+    }//creates a menu that you can access through the main menu by clicking high score
     
 }

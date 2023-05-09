@@ -22,7 +22,7 @@ public class PacMan {
     int numMoved;
     boolean eatFire;
     
-    public PacMan(Maze m) {
+    public PacMan() {
         initialPositionX = 54;
         initialPositionY = 503;
         positionX = 54;
@@ -52,7 +52,7 @@ public class PacMan {
 	
 	positionY = (503 - ((14 - tileY) * 32));
 
-    }
+    }//centers pacman in the tile
 
     public boolean isCentered() {
 	if ((positionX - 54) % 32 == 0 && (503 - positionY) % 32 == 0) {
@@ -61,7 +61,7 @@ public class PacMan {
 	
 	else {
 	    return false;
-	}
+	}//checks to see if pacman is centered by checking x and y position
     }
     
     public void update(double time, Maze m) {
@@ -247,7 +247,7 @@ public class PacMan {
 	else {
 	    updateAngle(1, tileDir);
 	}
-    }
+    } //creates pacman's mouth movements
 
     public void updateAngle(int operation, int dir) {
 	if (operation == 0) {

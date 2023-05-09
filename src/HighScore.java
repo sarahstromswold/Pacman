@@ -16,7 +16,8 @@ public class HighScore {
             PrintWriter writer = new PrintWriter(fileName);
             if(pacman.numPoints > highscore) {
                 writer.write(pacman.numPoints + " ");
-            } else{
+            }//save pacman's current score if it is higher than the saved high score
+            else{
                 writer.write(highscore + " ");
             }
             writer.close();
@@ -31,22 +32,19 @@ public class HighScore {
 
         try{
             Scanner s = new Scanner(new File(fileName));
-//            System.out.println(s.hasNextInt());
             while(s.hasNextInt()) {
                 highscore = s.nextInt();
                 System.out.println(highscore);
                 s.nextLine();
-            }
+            } //loads high score
             s.close();
         }
         catch (Exception e){
             System.out.println("Badness in loadPointFromFile");
             System.err.println(e);
         }
-        System.out.println("will return:" + highscore);
-        return highscore;
-
-
-    }
+        //System.out.println("will return:" + highscore);
+        return highscore; //returns highscore in terminal
+        }
 }
 
