@@ -39,10 +39,12 @@ public class Maze {
 			tile0.tile = tile0.rotate();
 		    }
 		    addTile(tile0, i, j);
+		    //adds first tile to maze, but makes sure bottom right corner is free for pacman to spawn
 		}
 		else if (i == 1 && j == 2) {
 		    Tile c = new Tile(4, 0);
 		    addTile(c, i, j);
+		    //if it's the center, call the cell tile
 		}
 		else {
 		    Tile tile1 = new Tile(t, r);
@@ -55,6 +57,7 @@ public class Maze {
 	}
 	lastTile();
 	lastTile();
+	//fixes maze as many times as check maze is false, then fixes two lastTiels (there seems to be one vertical and one horizontal issue otherwise)
     }
     
     public void colorTiles(Graphics g) {
@@ -74,6 +77,7 @@ public class Maze {
 		else if (maze[i][j] > 2 && maze[i][j] != 4 && maze[i][j] != 5) {
 		    maze[i][j] = 0;
 		}
+		//if it would be a powerup (if it's not a block (1) or a ghost cell wall (2), set to zero (it can't be a center of the cell(4) or a block that used to be a powerup (5))
 		x += 32;
 	    }
 	    y -= 32;
@@ -97,14 +101,13 @@ public class Maze {
 			    p.drawNormal(i, j, g);
 			    numPlaced++;
 			}
+			//draws normal points if != 20 or 40
 			else if (numPlaced == 20) {
 			    p.drawKill(i, j, g);
-			    //r = rand.nextInt(20, 31);
 			    numPlaced++;
 			}
 			else if (numPlaced == 40) {
 			    p.drawWalls(i, j, g);
-			    // r = rand.nextInt(20, 31);
 			    numPlaced = 0;
 			}
 			maze[i][j] = 3;
@@ -120,6 +123,7 @@ public class Maze {
 			    p.drawKill(i, j, g);
 			}
 		    }
+		    //if not generating the points for the first time, then color them in according to their values in the powerups array
 		}
 	    }
 	}
@@ -132,6 +136,7 @@ public class Maze {
 	    for (int j = 0; j < 5; j++) {
 		maze[(r * 5) + i][(c * 5) + j] = t.tile[i][j];
 	    }
+	    //add tile to the maze array
 	}
     }
 
@@ -153,6 +158,7 @@ public class Maze {
 				    maze[i][j] = k;
 				}
 			    }
+			    //at every index in the maze, check every square around it and see (as long as in bounds), if a square around it equals the last value of k, set this square equal to the new k, and decrement k
 			}
 		    }
 		}
@@ -169,12 +175,14 @@ public class Maze {
 		else if (maze[i][j] == 0) {
 		    zero = false;
 		}
+		//checks to see if there are any zeroes
 	    }
 	}
 	return zero;
     }
 
     public void fixMaze() {
+	//looks around the wall with a zero and a "number" (value greater than 2) and removes the one with the smallest number
 	int smX = 0;
 	int smY = 14;
 	int current = 201;
@@ -195,6 +203,7 @@ public class Maze {
 			    }
 			}
 		    }
+		  
 		    for (int r = i + 1; r >= i - 1; r--) {
 			for (int c = j - 1; c <= j + 1; c++) {
 
@@ -215,6 +224,8 @@ public class Maze {
     }
 
     public void lastTile() {
+	//keeps track of the largest difference on two sides of a tile
+	//then it removes the tile that has this difference
 	int lgDiff = 0;
 	int remX = 0;
 	int remY = 14;
@@ -259,6 +270,7 @@ public class Maze {
 		    noPoint = false;
 		}
 	    }
+	    //if there are no points left in the maze return true
 	}
 	return noPoint;
     }
